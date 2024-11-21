@@ -522,7 +522,10 @@ GetCGameAPI
 The only exported function from this module
 ================
 */
-clientGameExport_t *GetCGameAPI( void )
+#ifdef __cplusplus
+extern "C" // this file isn't C++ yet but if it's going to be, be prepared
+#endif
+EXPORT clientGameExport_t *GetCGameAPI( void )
 {
 	static clientGameExport_t cge;
 
