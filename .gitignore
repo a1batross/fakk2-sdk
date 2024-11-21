@@ -1,0 +1,8 @@
+# waf
+build/
+.waf3-*
+waf3-*
+.lock*
+
+# nano
+*.swp

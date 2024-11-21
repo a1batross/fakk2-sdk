@@ -1,0 +1,54 @@
+#! /usr/bin/env python
+# encoding: utf-8
+# a1batross, mittorn, 2018
+
+from waflib import Build, Configure, Context, Logs
+import sys
+import os
+import re
+
+VERSION = '1.02'
+APPNAME = 'fakk2-sdk'
+top = '.'
+default_prefix = '/'
+
+Context.Context.line_just = 60 # should fit for everything on 80x26
+
+def options(opt):
+	opt.load('reconfigure compiler_optimizations compiler_cxx compiler_c clang_compilation_database strip_on_install msdev msvs subproject')
+
+	opt.add_subproject('source/cgame')
+	opt.add_subproject('source/fgame')
+
+def configure(conf):
+	conf.load('fwgslib reconfigure compiler_optimizations compiler_c compiler_cxx subproject clang_compilation_database enforce_pic')
+
+	enforce_pic = True # modern defaults
+	conf.check_pic(enforce_pic)
+
+	cflags, linkflags = conf.get_optimization_flags()
+	cxxflags = list(cflags) # optimization flags are common between C and C++ but we need a copy
+
+	conf.check_cc(cflags=cflags, linkflags=linkflags, msg='Checking for required C flags')
+	conf.check_cxx(cxxflags=cxxflags, linkflags=linkflags, msg='Checking for required C++ flags')
+
+	conf.env.append_unique('CFLAGS', cflags)
+	conf.env.append_unique('CXXFLAGS', cxxflags)
+	conf.env.append_unique('LINKFLAGS', linkflags)
+
+	conf.check_cc(lib='m')
+
+	conf.add_subproject('source/cgame')
+	conf.add_subproject('source/fgame')
+
+def build(bld):
+	if bld.is_install and not bld.options.destdir:
+		bld.fatal('Set the install destination directory using --destdir option')
+
+	# don't clean QtCreator files and reconfigure saved options
+	bld.clean_files = bld.bldnode.ant_glob('**',
+		excl='*.user configuration.py .lock* *conf_check_*/** config.log %s/*' % Build.CACHE_DIR,
+		quiet=True, generator=True)
+
+	bld.add_subproject('source/cgame')
+	bld.add_subproject('source/fgame')
