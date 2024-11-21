@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/Utils/max2plugins/skelout/dllmain.h                $
 // $Revision:: 2                                                              $
@@ -11,12 +11,12 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/Utils/max2plugins/skelout/dllmain.h                     $
-// 
+//
 // 2     7/30/99 4:23p Jimdose
 // working on skel output
 //
 // DESCRIPTION:
-// 
+//
 
 #ifndef __DLLMAIN_H__
 #define __DLLMAIN_H__

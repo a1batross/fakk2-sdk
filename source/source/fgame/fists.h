@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/fists.h                               $
 // $Revision:: 1                                                              $
@@ -12,14 +12,14 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/fists.h                                    $
-// 
+//
 // 1     9/10/99 10:53a Jimdose
-// 
+//
 // 1     9/08/99 3:16p Aldie
-// 
+//
 // DESCRIPTION:
 // Mutant Hands
-// 
+//
 
 #ifndef __FISTS_H__
 #define __FISTS_H__
@@ -29,42 +29,36 @@
 #include "weapon.h"
 
 class Fists : public Weapon
-	{
-	public:
-      float             strike_reach;
-      float             strike_damage;
-      int               meansofdeath;
+{
+public:
+	float strike_reach;
+	float strike_damage;
+	int   meansofdeath;
 
-		CLASS_PROTOTYPE( Fists );
-		
-								Fists::Fists();
-		virtual void		Shoot( Event *ev );
-	   virtual void      Archive( Archiver &arc );
-      virtual void      Unarchive( Archiver &arc );
-	};
+	CLASS_PROTOTYPE( Fists );
 
-inline void Fists::Archive
-	(
-	Archiver &arc
-	)
-   {
-   Weapon::Archive( arc );
+	Fists::Fists();
+	virtual void Shoot( Event *ev );
+	virtual void Archive( Archiver &arc );
+	virtual void Unarchive( Archiver &arc );
+};
 
-   arc.WriteFloat( strike_reach );
-   arc.WriteFloat( strike_damage );
-   arc.WriteInteger( meansofdeath );
-   }
+inline void Fists::Archive( Archiver &arc )
+{
+	Weapon::Archive( arc );
 
-inline void Fists::Unarchive
-	(
-	Archiver &arc
-	)
-   {
-   Weapon::Unarchive( arc );
+	arc.WriteFloat( strike_reach );
+	arc.WriteFloat( strike_damage );
+	arc.WriteInteger( meansofdeath );
+}
 
-   arc.ReadFloat( &strike_reach );
-   arc.ReadFloat( &strike_damage );
-   arc.ReadInteger( &meansofdeath );
-   }
+inline void Fists::Unarchive( Archiver &arc )
+{
+	Weapon::Unarchive( arc );
+
+	arc.ReadFloat( &strike_reach );
+	arc.ReadFloat( &strike_damage );
+	arc.ReadInteger( &meansofdeath );
+}
 
 #endif /* Fists.h */

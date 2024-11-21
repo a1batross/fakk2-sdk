@@ -5,86 +5,112 @@ class UVector3;
 class UMat3;
 
 class UEuler
-   {
-   public:
-      float yaw;
-      float pitch;
-      float roll;
-      
-      inline UEuler () {} // Do nothing
-      UEuler ( float, float, float );
-      void setYPR ( float, float, float );
-      
-      friend UEuler operator + ( const UEuler &, const UEuler & );
-      friend UEuler operator - ( const UEuler &, const UEuler & );
-      friend UEuler operator * ( const UEuler &, float );
-      inline friend UEuler operator * ( float a, UEuler &b ) { return b * a; }
-      
-      UEuler &operator += ( const UEuler & );
-      UEuler &operator -= ( const UEuler & );
-      UEuler &operator *= ( float );
-      bool operator == ( const UEuler & ) const;
-      bool operator != ( const UEuler &a ) const { return ! ( *this == a ); }
-      
-      void operator = ( const UMat3 & );
+{
+public:
+	float yaw;
+	float pitch;
+	float roll;
 
-      void AngleVectors ( UVector3 *right, UVector3 *up, UVector3 *forward ) const;
-   };
+	inline UEuler()
+	{
+	}                 // Do nothing
 
-inline      UEuler::UEuler ( float yy, float pp, float rr ) { yaw = yy; pitch = pp; roll = rr; }
-inline void UEuler::setYPR ( float yy, float pp, float rr ) { yaw = yy; pitch = pp; roll = rr; }
+	UEuler( float, float, float );
+	void setYPR( float, float, float );
 
-inline UEuler &UEuler::operator += ( const UEuler &a )       { yaw += a.yaw; pitch += a.pitch; roll += a.roll; }
-inline UEuler &UEuler::operator -= ( const UEuler &a )       { yaw -= a.yaw; pitch -= a.pitch; roll -= a.roll; }
-inline UEuler &UEuler::operator *= ( float f )               { yaw *= f;     pitch *= f;       roll *= f;      }
-inline bool    UEuler::operator == ( const UEuler &a ) const { return ( pitch == a.pitch && roll == a.roll && yaw == a.yaw ); }
+	friend UEuler operator +( const UEuler &, const UEuler & );
+	friend UEuler operator -( const UEuler &, const UEuler & );
+	friend UEuler operator *( const UEuler &, float );
+	inline friend UEuler operator *( float a, UEuler &b )
+	{
+		return b * a;
+	}
 
-inline UEuler operator + 
-   (
-   const UEuler &a,
-   const UEuler &b 
-   )
+	UEuler &operator +=( const UEuler & );
+	UEuler &operator -=( const UEuler & );
+	UEuler &operator *=( float );
+	bool operator ==( const UEuler & ) const;
+	bool operator !=( const UEuler &a ) const
+	{
+		return !( *this == a );
+	}
 
-   {
-   UEuler c;
+	void operator =( const UMat3 & );
 
-   c.yaw = a.yaw + b.yaw;
-   c.pitch = a.pitch + b.pitch;
-   c.roll = a.roll + b.roll;
+	void AngleVectors( UVector3 *right, UVector3 *up, UVector3 *forward ) const;
+};
 
-   return c;
-   }
+inline UEuler::UEuler( float yy, float pp, float rr )
+{
+	yaw = yy;
+	pitch = pp;
+	roll = rr;
+}
 
-inline UEuler operator - 
-   (
-   const UEuler &a,
-   const UEuler &b 
-   )
+inline void UEuler::setYPR( float yy, float pp, float rr )
+{
+	yaw = yy;
+	pitch = pp;
+	roll = rr;
+}
 
-   {
-   UEuler c;
+inline UEuler &UEuler::operator +=( const UEuler &a )
+{
+	yaw += a.yaw;
+	pitch += a.pitch;
+	roll += a.roll;
+}
 
-   c.yaw = a.yaw - b.yaw;
-   c.pitch = a.pitch - b.pitch;
-   c.roll = a.roll - b.roll;
+inline UEuler &UEuler::operator -=( const UEuler &a )
+{
+	yaw -= a.yaw;
+	pitch -= a.pitch;
+	roll -= a.roll;
+}
 
-   return c;
-   }
+inline UEuler &UEuler::operator *=( float f )
+{
+	yaw *= f;
+	pitch *= f;
+	roll *= f;
+}
 
-inline UEuler operator *
-   (
-   const UEuler &a,
-   float b 
-   )
+inline bool UEuler::operator ==( const UEuler &a ) const
+{
+	return( pitch == a.pitch && roll == a.roll && yaw == a.yaw );
+}
 
-   {
-   UEuler c;
+inline UEuler operator +( const UEuler &a, const UEuler &b )
+{
+	UEuler c;
 
-   c.yaw = a.yaw * b;
-   c.pitch = a.pitch * b;
-   c.roll = a.roll * b;
+	c.yaw = a.yaw + b.yaw;
+	c.pitch = a.pitch + b.pitch;
+	c.roll = a.roll + b.roll;
 
-   return c;
-   }
+	return c;
+}
+
+inline UEuler operator -( const UEuler &a, const UEuler &b )
+{
+	UEuler c;
+
+	c.yaw = a.yaw - b.yaw;
+	c.pitch = a.pitch - b.pitch;
+	c.roll = a.roll - b.roll;
+
+	return c;
+}
+
+inline UEuler operator *( const UEuler &a, float b )
+{
+	UEuler c;
+
+	c.yaw = a.yaw * b;
+	c.pitch = a.pitch * b;
+	c.roll = a.roll * b;
+
+	return c;
+}
 
 #endif /* !__UEULER_H__ */

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/edenwater.h                        $
 // $Revision:: 2                                                              $
@@ -12,7 +12,7 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/edenwater.h                             $
-// 
+//
 // 2     1/18/00 3:11p Aldie
 // First version of edenwater
 //
@@ -29,12 +29,12 @@
 #include "item.h"
 
 class EdenWater : public Item
-	{
-	public:
-      CLASS_PROTOTYPE( EdenWater );
+{
+public:
+	CLASS_PROTOTYPE( EdenWater );
 
-								EdenWater();
-		virtual void		PickupEdenWater( Event *ev );
-	};
+	EdenWater();
+	virtual void PickupEdenWater( Event *ev );
+};
 
 #endif /* edenwater.h */

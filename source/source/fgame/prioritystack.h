@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/prioritystack.h                    $
 // $Revision:: 1                                                              $
@@ -12,14 +12,14 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/prioritystack.h                         $
-// 
+//
 // 1     9/10/99 10:54a Jimdose
-// 
+//
 // 1     9/08/99 3:16p Aldie
-// 
+//
 // DESCRIPTION:
 // Stack based object that pushes and pops objects in a priority based manner.
-// 
+//
 
 #ifndef __PRIORITYSTACK_H__
 #define __PRIORITYSTACK_H__
@@ -29,137 +29,120 @@
 
 template <class Type>
 class PriorityStackNode
-	{
-	public:
-		int					priority;
-		Type					data;
-		PriorityStackNode *next;
+{
+public:
+	int               priority;
+	Type              data;
+	PriorityStackNode *next;
 
-		PriorityStackNode( Type d, int p );
-	};
+	PriorityStackNode( Type d, int p );
+};
 
 template <class Type>
 inline PriorityStackNode<Type>::PriorityStackNode( Type d, int p ) : data( d )
-	{
+{
 	priority = p;
-	next = NULL; 
-	}
+	next = NULL;
+}
 
 template <class Type>
 class PriorityStack
-	{
-	private:
-		PriorityStackNode<Type> *head;
+{
+private:
+	PriorityStackNode<Type> *head;
 
-	public:
-					PriorityStack();
-					~PriorityStack<Type>();
-		void		Clear( void	);
-		qboolean Empty( void );
-		void		Push( Type data, int priority );
-		Type		Pop( void );
-	};
+public:
+	PriorityStack();
+	~PriorityStack<Type>();
+	void Clear( void );
+	qboolean Empty( void );
+	void Push( Type data, int priority );
+	Type Pop( void );
+};
 
 template <class Type>
 inline PriorityStack<Type>::PriorityStack()
-	{
+{
 	head = NULL;
-	}
+}
 
 template <class Type>
 inline PriorityStack<Type>::~PriorityStack<Type>()
-	{
+{
 	Clear();
-	}
+}
 
 template <class Type>
-inline void PriorityStack<Type>::Clear
-	(
-	void
-	)
-
+inline void PriorityStack<Type>::Clear( void )
+{
+	while( !Empty())
 	{
-	while( !Empty() )
-		{
 		Pop();
-		}
 	}
+}
 
 template <class Type>
-inline qboolean PriorityStack<Type>::Empty
-	(
-	void
-	)
-
+inline qboolean PriorityStack<Type>::Empty( void )
+{
+	if( head == NULL )
 	{
-	if ( head == NULL )
-		{
 		return true;
-		}
-	return false;
 	}
+	return false;
+}
 
 template <class Type>
-inline void PriorityStack<Type>::Push
-	(
-	Type data,
-	int priority
-	)
-
-	{
+inline void PriorityStack<Type>::Push( Type data, int priority )
+{
 	PriorityStackNode<Type> *tmp;
 	PriorityStackNode<Type> *next;
 	PriorityStackNode<Type> *prev;
 
 	tmp = new PriorityStackNode<Type>( data, priority );
-	if ( !tmp )
-		{
+	if( !tmp )
+	{
 		assert( NULL );
 		gi.error( "PriorityStack::Push : Out of memory" );
-		}
+	}
 
-	if ( !head || ( priority >= head->priority ) )
-		{
+	if( !head || ( priority >= head->priority ))
+	{
 		tmp->next = head;
 		head = tmp;
-		}
+	}
 	else
-		{
+	{
 		for( prev = head, next = head->next; next; prev = next, next = next->next )
+		{
+			if( priority >= next->priority )
 			{
-			if ( priority >= next->priority )
-				{
 				break;
-				}
 			}
+		}
 
 		tmp->next = prev->next;
 		prev->next = tmp;
-		}
 	}
+}
 
 template <class Type>
-inline Type PriorityStack<Type>::Pop
-	(
-	void
-	)
-
-	{
+inline Type PriorityStack<Type>::Pop( void )
+{
 	Type ret;
 	PriorityStackNode<Type> *node;
 
-	if ( !head )
-		{
+	if( !head )
+	{
 		return NULL;
-		}
+	}
 
-	node	= head;
-	ret	= node->data;
-	head	= node->next;
+	node = head;
+	ret = node->data;
+	head = node->next;
 
 	delete node;
 
 	return ret;
-	}
+}
 
 #endif /* prioritystack.h */

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/bg_misc.c                          $
 // $Revision:: 8                                                              $
@@ -12,10 +12,10 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/bg_misc.c                               $
-// 
+//
 // 8     10/12/99 2:23p Markd
 // Rewrote camera and player movetype system
-// 
+//
 // 7     10/05/99 6:01p Aldie
 // Added headers
 //
@@ -33,17 +33,19 @@ EvaluateTrajectory
 
 ================
 */
-void EvaluateTrajectory( const trajectory_t *tr, int atTime, vec3_t result ) {
-	float		deltaTime;
-	float		phase;
+void EvaluateTrajectory( const trajectory_t *tr, int atTime, vec3_t result )
+{
+	float deltaTime;
+	float phase;
 
-	switch( tr->trType ) {
+	switch( tr->trType )
+	{
 	case TR_STATIONARY:
 	case TR_INTERPOLATE:
 		VectorCopy( tr->trBase, result );
 		break;
 	case TR_LINEAR:
-		deltaTime = ( atTime - tr->trTime ) * 0.001;	// milliseconds to seconds
+		deltaTime = ( atTime - tr->trTime ) * 0.001; // milliseconds to seconds
 		VectorMA( tr->trBase, deltaTime, tr->trDelta, result );
 		break;
 	case TR_SINE:
@@ -52,19 +54,21 @@ void EvaluateTrajectory( const trajectory_t *tr, int atTime, vec3_t result ) {
 		VectorMA( tr->trBase, phase, tr->trDelta, result );
 		break;
 	case TR_LINEAR_STOP:
-		if ( atTime > tr->trTime + tr->trDuration ) {
+		if( atTime > tr->trTime + tr->trDuration )
+		{
 			atTime = tr->trTime + tr->trDuration;
 		}
-		deltaTime = ( atTime - tr->trTime ) * 0.001;	// milliseconds to seconds
-		if ( deltaTime < 0 ) {
+		deltaTime = ( atTime - tr->trTime ) * 0.001; // milliseconds to seconds
+		if( deltaTime < 0 )
+		{
 			deltaTime = 0;
 		}
 		VectorMA( tr->trBase, deltaTime, tr->trDelta, result );
 		break;
 	case TR_GRAVITY:
-		deltaTime = ( atTime - tr->trTime ) * 0.001;	// milliseconds to seconds
+		deltaTime = ( atTime - tr->trTime ) * 0.001; // milliseconds to seconds
 		VectorMA( tr->trBase, deltaTime, tr->trDelta, result );
-		result[2] -= 0.5 * DEFAULT_GRAVITY * deltaTime * deltaTime;		// FIXME: local gravity...
+		result[2] -= 0.5 * DEFAULT_GRAVITY * deltaTime * deltaTime; // FIXME: local gravity...
 		break;
 	default:
 		Com_Error( ERR_DROP, "EvaluateTrajectory: unknown trType: %i", tr->trType );
@@ -78,11 +82,13 @@ EvaluateTrajectoryDelta
 
 ================
 */
-void EvaluateTrajectoryDelta( const trajectory_t *tr, int atTime, vec3_t result ) {
-	float	deltaTime;
-	float	phase;
+void EvaluateTrajectoryDelta( const trajectory_t *tr, int atTime, vec3_t result )
+{
+	float deltaTime;
+	float phase;
 
-	switch( tr->trType ) {
+	switch( tr->trType )
+	{
 	case TR_STATIONARY:
 	case TR_INTERPOLATE:
 		VectorClear( result );
@@ -92,26 +98,25 @@ void EvaluateTrajectoryDelta( const trajectory_t *tr, int atTime, vec3_t result 
 		break;
 	case TR_SINE:
 		deltaTime = ( atTime - tr->trTime ) / (float) tr->trDuration;
-		phase = cos( deltaTime * M_PI * 2 );	// derivative of sin = cos
+		phase = cos( deltaTime * M_PI * 2 ); // derivative of sin = cos
 		phase *= 0.5;
 		VectorScale( tr->trDelta, phase, result );
 		break;
 	case TR_LINEAR_STOP:
-		if ( atTime > tr->trTime + tr->trDuration ) {
+		if( atTime > tr->trTime + tr->trDuration )
+		{
 			VectorClear( result );
 			return;
 		}
 		VectorCopy( tr->trDelta, result );
 		break;
 	case TR_GRAVITY:
-		deltaTime = ( atTime - tr->trTime ) * 0.001;	// milliseconds to seconds
+		deltaTime = ( atTime - tr->trTime ) * 0.001; // milliseconds to seconds
 		VectorCopy( tr->trDelta, result );
-		result[2] -= DEFAULT_GRAVITY * deltaTime;		// FIXME: local gravity...
+		result[2] -= DEFAULT_GRAVITY * deltaTime; // FIXME: local gravity...
 		break;
 	default:
 		Com_Error( ERR_DROP, "EvaluateTrajectoryDelta: unknown trType: %i", tr->trTime );
 		break;
 	}
 }
-
-

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/decals.cpp                         $
 // $Revision:: 4                                                              $
@@ -12,13 +12,13 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/decals.cpp                              $
-// 
+//
 // 4     6/23/00 11:49a Markd
 // fixed various imagindexes and saved games
-// 
+//
 // 3     6/14/00 3:50p Markd
 // Cleaned up more Intel Compiler warnings
-// 
+//
 // 2     1/29/00 2:48p Aldie
 // Added impact mark functionality and Decal class
 //
@@ -29,66 +29,46 @@
 
 
 CLASS_DECLARATION( Entity, Decal, NULL )
-	{
-		{ NULL, NULL }
-	};
+{
+	{ NULL, NULL }
+};
 
-Decal::Decal
-   (
-   )
+Decal::Decal()
+{
+	edict->s.eType = ET_DECAL;
+	edict->s.modelindex = 1;      // must be non-zero
+	PostEvent( EV_Remove, FRAMETIME );
+}
 
-   {
-   edict->s.eType = ET_DECAL;
-   edict->s.modelindex  = 1;	      // must be non-zero
-   PostEvent( EV_Remove, FRAMETIME );
-   }
+void Decal::setDirection( Vector dir )
+{
+	edict->s.surfaces[0] = DirToByte( dir );
+}
 
-void Decal::setDirection
-   (
-   Vector dir
-   )
+void Decal::setShader( str decal_shader )
+{
+	str temp_shader;
 
-   {
-   edict->s.surfaces[0] = DirToByte( dir );
-   }
-
-void Decal::setShader
-   (
-   str decal_shader
-   )
-
-   {
-   str temp_shader;
-
-   shader = decal_shader;
-   edict->s.tag_num = gi.imageindex( shader.c_str() );
+	shader = decal_shader;
+	edict->s.tag_num = gi.imageindex( shader.c_str());
 
 	temp_shader = shader + ".spr";
 	CacheResource( temp_shader, this );
-   }
+}
 
-void Decal::setOrientation
-   (
-   str deg
-   )
+void Decal::setOrientation( str deg )
+{
+	Vector ang;
 
-   {
-   Vector ang;
+	if( !deg.icmp( "random" ))
+		ang[2] = random() * 360;
+	else
+		ang[2] = atof( deg );
 
-   if ( !deg.icmp( "random" ) )
-      ang[2] = random() * 360;
-   else
-      ang[2] = atof( deg );   
+	setAngles( ang );
+}
 
-   setAngles( ang );
-   }
-
-void Decal::setRadius 
-   (
-   float rad
-   )
-
-   {
-   edict->s.scale = rad;
-   }
-
+void Decal::setRadius( float rad )
+{
+	edict->s.scale = rad;
+}

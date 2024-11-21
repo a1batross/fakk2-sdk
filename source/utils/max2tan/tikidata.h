@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /FAKK2/code/game/actor.cpp                        $
 // $Revision:: 3                                                              $
@@ -29,83 +29,85 @@ extern "C" {
 #include "qfiles.h"
 #include "models.h"
 
-#define MAX_SURFACE_TRIS	(SHADER_MAX_INDEXES / 3)
-#define MAX_SURFACE_VERTS	SHADER_MAX_VERTEXES
-
-typedef struct {
-	vec3_t		xyz;
-	vec3_t		normal;
-	vec3_t		color;
-	float		   st[2];
-	int			index;
-} baseVertex_t;
-
-typedef struct 
-   {
-	int			index;
-   } triVertex_t;
-	
-typedef struct {
-	triVertex_t	v[3];
-} baseTriangle_t;
-
-//================================================================
+#define MAX_SURFACE_TRIS  ( SHADER_MAX_INDEXES / 3 )
+#define MAX_SURFACE_VERTS SHADER_MAX_VERTEXES
 
 typedef struct
 {
-	tikiSurface_t	header;
-	md3Shader_t		shaders[TIKI_MAX_SHADERS];
-	// all verts (xyz_normal)
-	float	*verts[TIKI_MAX_FRAMES];
+	vec3_t xyz;
+	vec3_t normal;
+	vec3_t color;
+	float  st[2];
+	int    index;
+} baseVertex_t;
 
-	baseTriangle_t	baseTriangles[TIKI_MAX_TRIANGLES];
+typedef struct
+{
+	int index;
+} triVertex_t;
+
+typedef struct
+{
+	triVertex_t v[3];
+} baseTriangle_t;
+
+// ================================================================
+
+typedef struct
+{
+	tikiSurface_t  header;
+	md3Shader_t    shaders[TIKI_MAX_SHADERS];
+	// all verts (xyz_normal)
+	float          *verts[TIKI_MAX_FRAMES];
+
+	baseTriangle_t baseTriangles[TIKI_MAX_TRIANGLES];
 
 	// the triangles will be sorted so that they form long generalized tristrips
-	int				orderedTriangles[TIKI_MAX_TRIANGLES][3];
-	int				lodTriangles[TIKI_MAX_TRIANGLES][3];
-	baseVertex_t	baseVertexes[TIKI_MAX_VERTS];
-   int            collapseMap[TIKI_MAX_VERTS];
-   int            permutationMap[TIKI_MAX_VERTS];
+	int            orderedTriangles[TIKI_MAX_TRIANGLES][3];
+	int            lodTriangles[TIKI_MAX_TRIANGLES][3];
+	baseVertex_t   baseVertexes[TIKI_MAX_VERTS];
+	int            collapseMap[TIKI_MAX_VERTS];
+	int            permutationMap[TIKI_MAX_VERTS];
 
 } md3SurfaceData_t;
 
 typedef struct
 {
-	int			   skinwidth, skinheight;
-	
-	md3SurfaceData_t surfData[TIKI_MAX_SURFACES*2];
+	int              skinwidth, skinheight;
 
-	tikiTag_t	   tags[TIKI_MAX_TAGS];
-	tikiTagData_t	tagdata[TIKI_MAX_TAGS][TIKI_MAX_FRAMES];
-	tikiFrame_t	   frames[TIKI_MAX_FRAMES];
-   vec3_t         origins[TIKI_MAX_FRAMES];
+	md3SurfaceData_t surfData[TIKI_MAX_SURFACES * 2];
 
-	tikiHeader_t	model;
-	float		      scale_up;			// set by $scale
-	vec3_t		   adjust;				// set by $origin
-	vec3_t		   aseAdjust;
-	int			   fixedwidth, fixedheight;	// set by $skinsize
+	tikiTag_t        tags[TIKI_MAX_TAGS];
+	tikiTagData_t    tagdata[TIKI_MAX_TAGS][TIKI_MAX_FRAMES];
+	tikiFrame_t      frames[TIKI_MAX_FRAMES];
+	vec3_t           origins[TIKI_MAX_FRAMES];
 
-	int			   maxSurfaceTris;
+	tikiHeader_t     model;
+	float            scale_up;                      // set by $scale
+	vec3_t           adjust;                        // set by $origin
+	vec3_t           aseAdjust;
+	int              fixedwidth, fixedheight;               // set by $skinsize
 
-	int			   lowerSkipFrameStart, lowerSkipFrameEnd;
-	int			   maxUpperFrames;
-	int			   maxHeadFrames;
-	int			   currentLod;
-	float		      lodBias;
-   int            minLod;
+	int              maxSurfaceTris;
 
-	int			   type;		
-   float          framerate;
+	int              lowerSkipFrameStart, lowerSkipFrameEnd;
+	int              maxUpperFrames;
+	int              maxHeadFrames;
+	int              currentLod;
+	float            lodBias;
+	int              minLod;
 
-   char           originname[ 128 ];
-   char           **ignorelist;
-   int            numignore;
+	int              type;
+	float            framerate;
+
+	char             originname[ 128 ];
+	char             **ignorelist;
+	int              numignore;
 
 } q3data;
 
 #ifdef __cplusplus
-   }
+}
 #endif
 
 #endif

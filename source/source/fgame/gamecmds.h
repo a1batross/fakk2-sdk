@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/gamecmds.h                         $
 // $Revision:: 5                                                              $
@@ -11,36 +11,36 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/gamecmds.h                              $
-// 
+//
 // 5     7/10/00 9:27p Markd
 // added ammo variables for how much ammo the player has.  Added levelvars and
 // gamevars commands
-// 
+//
 // 4     4/26/00 7:55p Markd
 // Added more documentation code into various systems
-// 
+//
 // 3     1/28/00 5:43p Markd
 // Added script command to the game
-// 
+//
 // 2     1/06/00 11:10p Jimdose
 // cleaning up unused code
 //
 // DESCRIPTION:
-// 
+//
 
 #ifndef __GAMECMDS_H__
 #define __GAMECMDS_H__
 
 #include "g_local.h"
 
-extern "C" void      G_ClientCommand( gentity_t *ent );
-extern "C" qboolean  G_ConsoleCommand( void );
+extern "C" void G_ClientCommand( gentity_t *ent );
+extern "C" qboolean G_ConsoleCommand( void );
 
-void     G_InitConsoleCommands( void );
+void G_InitConsoleCommands( void );
 
 qboolean G_ProcessClientCommand( gentity_t *ent );
 
-void     G_Say( gentity_t *ent, qboolean team, qboolean arg0 );
+void G_Say( gentity_t *ent, qboolean team, qboolean arg0 );
 qboolean G_CameraCmd( gentity_t *ent );
 qboolean G_SoundCmd( gentity_t *ent );
 qboolean G_SayCmd( gentity_t *ent );

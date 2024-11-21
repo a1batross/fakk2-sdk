@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/fgame/events.h                           $
 // $Revision:: 1                                                              $
@@ -12,11 +12,11 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/fgame/events.h                                $
-// 
+//
 // 1     9/10/99 10:53a Jimdose
-// 
+//
 // 1     9/08/99 3:15p Aldie
-// 
+//
 // DESCRIPTION:
 // Event definitions for communication between Sin and DLL's
 //
@@ -28,11 +28,11 @@
 typedef int event_t;
 
 enum
-	{
+{
 	EVENT_DEFAULT_MINEVENT = 1,
 
 	// Player events
-	EVENT_CLIENTCONNECT = EVENT_DEFAULT_MINEVENT,
+	EVENT_CLIENTCONNECT    = EVENT_DEFAULT_MINEVENT,
 	EVENT_CLIENTDISCONNECT,
 	EVENT_CLIENTKILL,
 	EVENT_CLIENTMOVE,
@@ -49,21 +49,21 @@ enum
 	EVENT_THINK,
 	EVENT_ACTIVATE,
 	EVENT_USE,
-    EVENT_FOOTSTEP,
+	EVENT_FOOTSTEP,
 
 	// Physics events
 	EVENT_MOVEDONE,
 	EVENT_TOUCH,
 	EVENT_BLOCKED,
 
-   // Animation events
-   EVENT_ANIM_FRAME,
-   EVENT_ANIM_NEWANIM,
-   EVENT_ANIM_LASTFRAME,
+	// Animation events
+	EVENT_ANIM_FRAME,
+	EVENT_ANIM_NEWANIM,
+	EVENT_ANIM_LASTFRAME,
 
 	// For subclass events
 	EVENT_DEFAULT_MAXEVENT
-	};
+};
 
 #endif
 

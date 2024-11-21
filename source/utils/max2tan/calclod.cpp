@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /FAKK2/code/game/actor.cpp                        $
 // $Revision:: 3                                                              $
@@ -27,50 +27,46 @@
 #include "tikidata.h"
 #include "calclod.h"
 
-void CalculateLOD
-   (
-   md3SurfaceData_t *surf
-   )
+void CalculateLOD( md3SurfaceData_t *surf )
+{
+	int           i;
+	List<Vector>  verts;
+	List<tridata> tris;
+	List<int>     permutation;
+	List<int>     collapse_map;
+	int           minresolution;
 
-   {
-	int	i;
-   List<Vector> verts;
-   List<tridata> tris;
-   List<int> permutation;
-   List<int> collapse_map;
-   int minresolution;
+	// clear out collapse map
+	memset( surf->collapseMap, 0, sizeof( surf->collapseMap ));
 
-   // clear out collapse map
-   memset( surf->collapseMap, 0, sizeof( surf->collapseMap ) );
-
-   // convert vertices
-	for( i = 0; i < surf->header.numVerts;i++ )
-      {
+	// convert vertices
+	for( i = 0; i < surf->header.numVerts; i++ )
+	{
 		float *vp = surf->baseVertexes[ i ].xyz;
-		verts.Add( Vector( vp[0],vp[1],vp[2] ) );
-	   }
+		verts.Add( Vector( vp[0], vp[1], vp[2] ));
+	}
 
-   // convert triangles
+	// convert triangles
 	for( i = 0; i < surf->header.numTriangles; i++ )
-      {
+	{
 		tridata td;
 
 		td.v[ 0 ] = surf->baseTriangles[ i ].v[ 0 ].index;
-      td.v[ 1 ] = surf->baseTriangles[ i ].v[ 1 ].index;
-      td.v[ 2 ] = surf->baseTriangles[ i ].v[ 2 ].index;
+		td.v[ 1 ] = surf->baseTriangles[ i ].v[ 1 ].index;
+		td.v[ 2 ] = surf->baseTriangles[ i ].v[ 2 ].index;
 		tris.Add( td );
-	   }
+	}
 
-   ProgressiveMesh( verts, tris, collapse_map, permutation, &minresolution );
+	ProgressiveMesh( verts, tris, collapse_map, permutation, &minresolution );
 
-	// rearrange the vertex list 
+	// rearrange the vertex list
 	assert( permutation.num == verts.num );
 
-   for( i = 0; i < verts.num; i++ )
-      {
-      surf->permutationMap[ i ] = permutation[ i ];
-      surf->collapseMap[ i ] = collapse_map[ i ];
-      }
+	for( i = 0; i < verts.num; i++ )
+	{
+		surf->permutationMap[ i ] = permutation[ i ];
+		surf->collapseMap[ i ] = collapse_map[ i ];
+	}
 
-   surf->header.minLod = minresolution;
-   }
+	surf->header.minLod = minresolution;
+}

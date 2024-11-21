@@ -7,72 +7,93 @@
 */
 void MD3_ComputeTagFromTri( md3Tag_t *pTag, const float pTri[3][3] )
 {
-	float	len[3];
-	vec3_t	axes[3], sides[3];
-	int		longestSide, shortestSide, hypotSide;
-	int		origin;
-	int		j;
-	float	d;
+	float  len[3];
+	vec3_t axes[3], sides[3];
+	int    longestSide, shortestSide, hypotSide;
+	int    origin;
+	int    j;
+	float  d;
 
-	memset( axes, 0, sizeof( axes ) );
-	memset( sides, 0, sizeof( sides ) );
+	memset( axes, 0, sizeof( axes ));
+	memset( sides, 0, sizeof( sides ));
 
 	//
 	// compute sides
 	//
-	for ( j = 0; j < 3; j++ )
+	for( j = 0; j < 3; j++ )
 	{
-		sides[j][0] = pTri[(j+1)%3][0] - pTri[j][0];
-		sides[j][1] = pTri[(j+1)%3][1] - pTri[j][1];
-		sides[j][2] = pTri[(j+1)%3][2] - pTri[j][2];
+		sides[j][0] = pTri[( j + 1 ) % 3][0] - pTri[j][0];
+		sides[j][1] = pTri[( j + 1 ) % 3][1] - pTri[j][1];
+		sides[j][2] = pTri[( j + 1 ) % 3][2] - pTri[j][2];
 
-		len[j] = ( float ) sqrt( DotProduct( sides[j], sides[j] ) );
+		len[j] = (float) sqrt( DotProduct( sides[j], sides[j] ));
 	}
 
 #if 0
-	if ( len[0] > len[1] && len[0] > len[2] )
+	if( len[0] > len[1] && len[0] > len[2] )
 	{
-		longestSide = 0; shortestSide = 1; origin = 2;
+		longestSide = 0;
+		shortestSide = 1;
+		origin = 2;
 	}
-	else if ( len[1] > len[0] && len[1] > len[2] )
+	else if( len[1] > len[0] && len[1] > len[2] )
 	{
-		longestSide = 1; shortestSide = 2; origin = 0;
+		longestSide = 1;
+		shortestSide = 2;
+		origin = 0;
 	}
-	else if ( len[2] > len[0] && len[2] > len[1] )
+	else if( len[2] > len[0] && len[2] > len[1] )
 	{
-		longestSide = 2; shortestSide = 0; origin = 1;
+		longestSide = 2;
+		shortestSide = 0;
+		origin = 1;
 	}
 	else
 	{
 		Error( "invalid tag triangle, must be a right triangle with unequal length sides" );
 	}
 #endif
-	if ( len[0] > len[1] && len[0] > len[2] ) {
+	if( len[0] > len[1] && len[0] > len[2] )
+	{
 		hypotSide = 0;
 		origin = 2;
-	} else if ( len[1] > len[0] && len[1] > len[2] ) {
+	}
+	else if( len[1] > len[0] && len[1] > len[2] )
+	{
 		hypotSide = 1;
 		origin = 0;
-	} else if ( len[2] > len[0] && len[2] > len[1] ) {
+	}
+	else if( len[2] > len[0] && len[2] > len[1] )
+	{
 		hypotSide = 2;
 		origin = 1;
 	}
 	len[hypotSide] = -1;
 
-	if ( len[0] > len[1] && len[0] > len[2] ) {
+	if( len[0] > len[1] && len[0] > len[2] )
+	{
 		longestSide = 0;
-	} else if ( len[1] > len[0] && len[1] > len[2] ) {
+	}
+	else if( len[1] > len[0] && len[1] > len[2] )
+	{
 		longestSide = 1;
-	} else if ( len[2] > len[0] && len[2] > len[1] ) {
+	}
+	else if( len[2] > len[0] && len[2] > len[1] )
+	{
 		longestSide = 2;
 	}
 	len[longestSide] = -1;
 
-	if ( len[0] > len[1] && len[0] > len[2] ) {
+	if( len[0] > len[1] && len[0] > len[2] )
+	{
 		shortestSide = 0;
-	} else if ( len[1] > len[0] && len[1] > len[2] ) {
+	}
+	else if( len[1] > len[0] && len[1] > len[2] )
+	{
 		shortestSide = 1;
-	} else if ( len[2] > len[0] && len[2] > len[1] ) {
+	}
+	else if( len[2] > len[0] && len[2] > len[1] )
+	{
 		shortestSide = 2;
 	}
 	len[shortestSide] = -1;
@@ -108,29 +129,29 @@ MD3_Dump
 */
 void MD3_Dump( const char *filename )
 {
-	md3Header_t header;
-	md3Tag_t *pTag;
+	md3Header_t  header;
+	md3Tag_t     *pTag;
 	md3Surface_t *pSurface;
-	FILE *fp;
-	void *_buffer;
-	void *buffer;
-	long fileSize;
-	int i;
+	FILE         *fp;
+	void         *_buffer;
+	void         *buffer;
+	long         fileSize;
+	int          i;
 
-	if ( ( fp = fopen( filename, "rb" ) ) == 0 )
+	if(( fp = fopen( filename, "rb" )) == 0 )
 	{
 		Error( "Unable to open '%s'\n", filename );
 	}
 
-	fileSize = filelength( fileno( fp ) );
-	_buffer = malloc( filelength( fileno( fp ) ) );
+	fileSize = filelength( fileno( fp ));
+	_buffer = malloc( filelength( fileno( fp )));
 	fread( _buffer, fileSize, 1, fp );
 	fclose( fp );
 
-	buffer = ( char * ) _buffer;
-	header = *( md3Header_t * ) _buffer;
+	buffer = (char *) _buffer;
+	header = *(md3Header_t *) _buffer;
 
-	if ( header.ident != MD3_IDENT )
+	if( header.ident != MD3_IDENT )
 	{
 		Error( "Incorrect ident for '%s'\n", filename );
 	}
@@ -145,8 +166,8 @@ void MD3_Dump( const char *filename )
 	printf( "  file size:      %d\n", fileSize );
 
 	printf( "--- TAGS ---\n" );
-	pTag = ( md3Tag_t * ) ( ( ( char * ) buffer ) + header.ofsTags );
-	for ( i = 0; i < header.numTags; i++, pTag++ )
+	pTag = (md3Tag_t *) (((char *) buffer ) + header.ofsTags );
+	for( i = 0; i < header.numTags; i++, pTag++ )
 	{
 		printf( "  tag %d ('%s')\n", i, pTag->name );
 		printf( "    origin: %f,%f,%f\n", pTag->origin[0], pTag->origin[1], pTag->origin[2] );
@@ -156,13 +177,13 @@ void MD3_Dump( const char *filename )
 	}
 
 	printf( "--- SURFACES ---\n" );
-	pSurface = ( md3Surface_t * ) ( ( ( char * ) buffer ) + header.ofsSurfaces );
+	pSurface = (md3Surface_t *) (((char *) buffer ) + header.ofsSurfaces );
 
-	for ( i = 0; i < header.numSurfaces; i++ )
+	for( i = 0; i < header.numSurfaces; i++ )
 	{
-		int j;
+		int         j;
 
-		md3Shader_t *pShader = ( md3Shader_t * ) ( ( ( char * ) pSurface ) + pSurface->ofsShaders );
+		md3Shader_t *pShader = (md3Shader_t *) (((char *) pSurface ) + pSurface->ofsShaders );
 
 		printf( "\n  surface %d ('%s')\n", i, pSurface->name );
 		printf( "    num frames: %d\n", pSurface->numFrames );
@@ -170,18 +191,17 @@ void MD3_Dump( const char *filename )
 		printf( "    num tris: %d\n", pSurface->numTriangles );
 		printf( "    num verts: %d\n", pSurface->numVerts );
 
-		if ( pSurface->numShaders > 0 )
+		if( pSurface->numShaders > 0 )
 		{
 			printf( "    --- SHADERS ---\n" );
 
-			for ( j = 0; j < pSurface->numShaders; j++, pShader++ )
+			for( j = 0; j < pSurface->numShaders; j++, pShader++ )
 			{
 				printf( "    shader %d ('%s')\n", j, pShader->name );
 			}
 		}
-		pSurface = ( md3Surface_t * ) ( ( ( char * ) pSurface ) + pSurface->ofsEnd );
+		pSurface = (md3Surface_t *) (((char *) pSurface ) + pSurface->ofsEnd );
 	}
 
 	free( _buffer );
 }
-

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/cgame/cg_event.c                         $
 // $Revision:: 4                                                              $
@@ -12,7 +12,7 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/cgame/cg_event.c                              $
-// 
+//
 // 4     10/05/99 6:01p Aldie
 // Added headers
 //
@@ -31,5 +31,5 @@ An entity has an event value
 */
 
 void CG_EntityEvent( centity_t *cent, vec3_t position )
-   {
-   }
+{
+}

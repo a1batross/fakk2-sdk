@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /fakk2_code/fakk2_new/cgame/cg_marks.c                         $
 // $Revision:: 11                                                             $
@@ -12,31 +12,31 @@
 // expressly written permission by Ritual Entertainment, Inc.
 //
 // $Log:: /fakk2_code/fakk2_new/cgame/cg_marks.c                              $
-// 
+//
 // 11    6/27/00 7:17p Aldie
 // Increase projection of point for impact mark
-// 
+//
 // 10    6/06/00 1:59p Aldie
 // Added fadein to marks
-// 
+//
 // 9     5/09/00 1:33p Markd
 // added some lightstyle utilities to SetLightStyle
-// 
+//
 // 8     5/09/00 1:29p Aldie
 // Added lightstyles to impact marks
-// 
+//
 // 7     2/10/00 8:05p Aldie
 // Changed marks again
-// 
+//
 // 6     2/10/00 6:59p Aldie
 // Made some changes to bulletholes.
-// 
+//
 // 5     12/11/99 3:37p Markd
 // q3a gold checkin, first time
-// 
+//
 // 4     10/22/99 6:29p Aldie
 // Fix for beams in the sky
-// 
+//
 // 3     10/05/99 6:01p Aldie
 // Added headers
 //
@@ -54,9 +54,9 @@ MARK POLYS
 */
 
 
-markPoly_t	cg_activeMarkPolys;			// double linked list
-markPoly_t	*cg_freeMarkPolys;			// single linked list
-markPoly_t	cg_markPolys[MAX_MARK_POLYS];
+markPoly_t cg_activeMarkPolys; // double linked list
+markPoly_t *cg_freeMarkPolys;  // single linked list
+markPoly_t cg_markPolys[MAX_MARK_POLYS];
 
 /*
 ===================
@@ -65,27 +65,30 @@ CG_InitMarkPolys
 This is called at startup and for tournement restarts
 ===================
 */
-void	CG_InitMarkPolys( void ) {
-	int		i;
+void CG_InitMarkPolys( void )
+{
+	int i;
 
-	memset( cg_markPolys, 0, sizeof(cg_markPolys) );
+	memset( cg_markPolys, 0, sizeof( cg_markPolys ));
 
 	cg_activeMarkPolys.nextMark = &cg_activeMarkPolys;
 	cg_activeMarkPolys.prevMark = &cg_activeMarkPolys;
 	cg_freeMarkPolys = cg_markPolys;
-	for ( i = 0 ; i < MAX_MARK_POLYS - 1 ; i++ ) {
-		cg_markPolys[i].nextMark = &cg_markPolys[i+1];
+	for( i = 0; i < MAX_MARK_POLYS - 1; i++ )
+	{
+		cg_markPolys[i].nextMark = &cg_markPolys[i + 1];
 	}
 }
-
 
 /*
 ==================
 CG_FreeMarkPoly
 ==================
 */
-void CG_FreeMarkPoly( markPoly_t *le ) {
-	if ( !le->prevMark ) {
+void CG_FreeMarkPoly( markPoly_t *le )
+{
+	if( !le->prevMark )
+	{
 		cgi.Error( ERR_DROP, "CG_FreeLocalEntity: not active" );
 	}
 
@@ -105,15 +108,18 @@ CG_AllocMark
 Will allways succeed, even if it requires freeing an old active mark
 ===================
 */
-markPoly_t	*CG_AllocMark( void ) {
-	markPoly_t	*le;
+markPoly_t *CG_AllocMark( void )
+{
+	markPoly_t *le;
 
-	if ( !cg_freeMarkPolys ) {
-      int time;
+	if( !cg_freeMarkPolys )
+	{
+		int time;
 		// no free entities, so free the one at the end of the chain
 		// remove the oldest active entity
 		time = cg_activeMarkPolys.prevMark->time;
-		while (cg_activeMarkPolys.prevMark && time == cg_activeMarkPolys.prevMark->time) {
+		while( cg_activeMarkPolys.prevMark && time == cg_activeMarkPolys.prevMark->time )
+		{
 			CG_FreeMarkPoly( cg_activeMarkPolys.prevMark );
 		}
 	}
@@ -121,7 +127,7 @@ markPoly_t	*CG_AllocMark( void ) {
 	le = cg_freeMarkPolys;
 	cg_freeMarkPolys = cg_freeMarkPolys->nextMark;
 
-	memset( le, 0, sizeof( *le ) );
+	memset( le, 0, sizeof( *le ));
 
 	// link into the active list
 	le->nextMark = cg_activeMarkPolys.nextMark;
@@ -130,8 +136,6 @@ markPoly_t	*CG_AllocMark( void ) {
 	cg_activeMarkPolys.nextMark = le;
 	return le;
 }
-
-
 
 /*
 =================
@@ -144,72 +148,59 @@ temporary marks will not be stored or randomly oriented, but immediately
 passed to the renderer.
 =================
 */
-#define	MAX_MARK_FRAGMENTS	128
-#define	MAX_MARK_POINTS		384
+#define MAX_MARK_FRAGMENTS 128
+#define MAX_MARK_POINTS    384
 
-void CG_ImpactMark
-   (
-   qhandle_t markShader, 
-   const vec3_t origin,
-   const vec3_t dir, 
-   float orientation,
-   float red, 
-   float green, 
-   float blue,
-   float alpha,
-   qboolean alphaFade,
-   float radius,
-   qboolean temporary,
-   int lightstyle, 
-   qboolean fadein
-   )
-   
-   {
-	vec3_t	   	axis[3];
-	float		   	texCoordScale;
-	vec3_t	   	originalPoints[4];
-	byte		   	colors[4];
-	int		   	i, j;
-	int				numFragments;
-	markFragment_t	markFragments[MAX_MARK_FRAGMENTS], *mf;
-	vec3_t			markPoints[MAX_MARK_POINTS];
-	vec3_t			projection;
+void CG_ImpactMark( qhandle_t markShader, const vec3_t origin, const vec3_t dir, float orientation, float red, float green, float blue, float alpha, qboolean alphaFade, float radius, qboolean temporary, int lightstyle, qboolean fadein )
+{
+	vec3_t         axis[3];
+	float          texCoordScale;
+	vec3_t         originalPoints[4];
+	byte           colors[4];
+	int            i, j;
+	int            numFragments;
+	markFragment_t markFragments[MAX_MARK_FRAGMENTS], *mf;
+	vec3_t         markPoints[MAX_MARK_POINTS];
+	vec3_t         projection;
 
-	if ( !cg_addMarks->integer ) {
+	if( !cg_addMarks->integer )
+	{
 		return;
 	}
 
-	if ( radius <= 0 ) {
+	if( radius <= 0 )
+	{
 		cgi.Error( ERR_DROP, "CG_ImpactMark called with <= 0 radius" );
 	}
 
 	// create the texture axis
 
-   if ( orientation )
-      {
-   	VectorNormalize2( dir, axis[0] );
-	   PerpendicularVector( axis[1], axis[0] );
-	   RotatePointAroundVector( axis[2], axis[0], axis[1], orientation );
-	   CrossProduct( axis[0], axis[2], axis[1] );
-      }
-   else
-      {
-      vec3_t angles;
-      vec3_t tmp;
+	if( orientation )
+	{
+		VectorNormalize2( dir, axis[0] );
+		PerpendicularVector( axis[1], axis[0] );
+		RotatePointAroundVector( axis[2], axis[0], axis[1], orientation );
+		CrossProduct( axis[0], axis[2], axis[1] );
+	}
+	else
+	{
+		vec3_t angles;
+		vec3_t tmp;
 
-   	VectorNormalize2( dir, axis[0] );
-      VectorCopy( dir, tmp );
-      tmp[0] = -tmp[0];
-      tmp[1] = -tmp[1];
-      vectoangles( tmp, angles );
-      AnglesToMat( angles, axis );
-      VectorScale( axis[2], -1, axis[2] );
-      }
+		VectorNormalize2( dir, axis[0] );
+		VectorCopy( dir, tmp );
+		tmp[0] = -tmp[0];
+		tmp[1] = -tmp[1];
+		vectoangles( tmp, angles );
+		AnglesToMat( angles, axis );
+		VectorScale( axis[2], -1, axis[2] );
+	}
 
 	texCoordScale = 0.5 * 1.0 / radius;
 
 	// create the full polygon
-	for ( i = 0 ; i < 3 ; i++ ) {
+	for( i = 0; i < 3; i++ )
+	{
 		originalPoints[0][i] = origin[i] - radius * axis[1][i] - radius * axis[2][i];
 		originalPoints[1][i] = origin[i] + radius * axis[1][i] - radius * axis[2][i];
 		originalPoints[2][i] = origin[i] + radius * axis[1][i] + radius * axis[2][i];
@@ -220,36 +211,39 @@ void CG_ImpactMark
 	VectorScale( dir, -32, projection );
 
 	numFragments = cgi.CM_MarkFragments( 4, (void *)originalPoints,
-					                          projection, MAX_MARK_POINTS, markPoints[0],
-					                          MAX_MARK_FRAGMENTS, markFragments );
+					     projection, MAX_MARK_POINTS, markPoints[0],
+					     MAX_MARK_FRAGMENTS, markFragments );
 
-   if ( fadein )
-      {
-	   colors[0] = 0;
-	   colors[1] = 0;
-	   colors[2] = 0;
-	   colors[3] = 0;
-      }
-   else
-      {
-	   colors[0] = red   * 255;
-	   colors[1] = green * 255;
-	   colors[2] = blue  * 255;
-	   colors[3] = alpha * 255;
-      }
+	if( fadein )
+	{
+		colors[0] = 0;
+		colors[1] = 0;
+		colors[2] = 0;
+		colors[3] = 0;
+	}
+	else
+	{
+		colors[0] = red * 255;
+		colors[1] = green * 255;
+		colors[2] = blue * 255;
+		colors[3] = alpha * 255;
+	}
 
-	for ( i = 0, mf = markFragments ; i < numFragments ; i++, mf++ ) {
-		polyVert_t	*v;
-		polyVert_t	verts[MAX_VERTS_ON_POLY];
-		markPoly_t	*mark;
+	for( i = 0, mf = markFragments; i < numFragments; i++, mf++ )
+	{
+		polyVert_t *v;
+		polyVert_t verts[MAX_VERTS_ON_POLY];
+		markPoly_t *mark;
 
 		// we have an upper limit on the complexity of polygons
 		// that we store persistantly
-		if ( mf->numPoints > MAX_VERTS_ON_POLY ) {
+		if( mf->numPoints > MAX_VERTS_ON_POLY )
+		{
 			mf->numPoints = MAX_VERTS_ON_POLY;
 		}
-		for ( j = 0, v = verts ; j < mf->numPoints ; j++, v++ ) {
-			vec3_t		delta;
+		for( j = 0, v = verts; j < mf->numPoints; j++, v++ )
+		{
+			vec3_t delta;
 
 			VectorCopy( markPoints[mf->firstPoint + j], v->xyz );
 
@@ -260,7 +254,8 @@ void CG_ImpactMark
 		}
 
 		// if it is a temporary (shadow) mark, add it immediately and forget about it
-		if ( temporary ) {
+		if( temporary )
+		{
 			cgi.R_AddPolyToScene( markShader, mf->numPoints, verts, 0 );
 			continue;
 		}
@@ -275,39 +270,42 @@ void CG_ImpactMark
 		mark->color[1] = green;
 		mark->color[2] = blue;
 		mark->color[3] = alpha;
-      mark->fadein   = fadein;
-      mark->lightstyle = lightstyle;
-		memcpy( mark->verts, verts, mf->numPoints * sizeof( verts[0] ) );
+		mark->fadein = fadein;
+		mark->lightstyle = lightstyle;
+		memcpy( mark->verts, verts, mf->numPoints * sizeof( verts[0] ));
 	}
 }
-
 
 /*
 ===============
 CG_AddMarks
 ===============
 */
-#define	MARK_TOTAL_TIME		10000
-#define	MARK_FADE_TIME		   1000
+#define MARK_TOTAL_TIME 10000
+#define MARK_FADE_TIME  1000
 
-void CG_AddMarks( void ) {
-	int			j;
-	markPoly_t	*mp, *next;
-	int			t;
-	int			fade;
+void CG_AddMarks( void )
+{
+	int        j;
+	markPoly_t *mp, *next;
+	int        t;
+	int        fade;
 
-	if ( !cg_addMarks->integer ) {
+	if( !cg_addMarks->integer )
+	{
 		return;
 	}
 
 	mp = cg_activeMarkPolys.nextMark;
-	for ( ; mp != &cg_activeMarkPolys ; mp = next ) {
+	for( ; mp != &cg_activeMarkPolys; mp = next )
+	{
 		// grab next now, so if the local entity is freed we
 		// still have it
 		next = mp->nextMark;
 
 		// see if it is time to completely remove it
-		if ( cg.time > mp->time + MARK_TOTAL_TIME ) {
+		if( cg.time > mp->time + MARK_TOTAL_TIME )
+		{
 			CG_FreeMarkPoly( mp );
 			continue;
 		}
@@ -315,74 +313,73 @@ void CG_AddMarks( void ) {
 		// fade all marks out with time
 		t = mp->time + MARK_TOTAL_TIME - cg.time;
 
-      if ( mp->lightstyle > 0 )
-         {
-         CG_LightStyleColor( mp->lightstyle, t, mp->color, qtrue );
-		   
-         if ( mp->color[3] <= 0 )
-            {
-			   CG_FreeMarkPoly( mp );
-			   continue;
-		      }
+		if( mp->lightstyle > 0 )
+		{
+			CG_LightStyleColor( mp->lightstyle, t, mp->color, qtrue );
 
-			for ( j = 0 ; j < mp->poly.numVerts ; j++ )
-            {
+			if( mp->color[3] <= 0 )
+			{
+				CG_FreeMarkPoly( mp );
+				continue;
+			}
+
+			for( j = 0; j < mp->poly.numVerts; j++ )
+			{
 				mp->verts[j].modulate[0] = mp->color[0] * 255;
 				mp->verts[j].modulate[1] = mp->color[1] * 255;
 				mp->verts[j].modulate[2] = mp->color[2] * 255;
 				mp->verts[j].modulate[3] = mp->color[3] * 255;
-				}
-         }
+			}
+		}
 
-      // Fade in marks
-      if ( mp->fadein )
-         {        
-         fade = 255 * ( cg.time - mp->time ) / MARK_FADE_TIME;
+		// Fade in marks
+		if( mp->fadein )
+		{
+			fade = 255 * ( cg.time - mp->time ) / MARK_FADE_TIME;
 
-         if ( fade > 255 )
-            fade = 255;
+			if( fade > 255 )
+				fade = 255;
 
-         if ( mp->alphaFade )
-            {
-	         for ( j = 0 ; j < mp->poly.numVerts ; j++ ) 
-               {
-		         mp->verts[j].modulate[3] = fade;
-		         }
-	         }
-         else 
-            {
-	         for ( j = 0 ; j < mp->poly.numVerts ; j++ )
-               {
-		         mp->verts[j].modulate[0] = mp->color[0] * fade;
-		         mp->verts[j].modulate[1] = mp->color[1] * fade;
-		         mp->verts[j].modulate[2] = mp->color[2] * fade;
-		         }
-	         }
-         }
-
-      // Fade out marks
-      if ( t < MARK_FADE_TIME ) 
-         {
-			fade = 255 * t / MARK_FADE_TIME;
-			if ( mp->alphaFade )
-            {
-				for ( j = 0 ; j < mp->poly.numVerts ; j++ ) 
-               {
+			if( mp->alphaFade )
+			{
+				for( j = 0; j < mp->poly.numVerts; j++ )
+				{
 					mp->verts[j].modulate[3] = fade;
-				   }
-			   }
-         else 
-            {
-				for ( j = 0 ; j < mp->poly.numVerts ; j++ )
-               {
+				}
+			}
+			else
+			{
+				for( j = 0; j < mp->poly.numVerts; j++ )
+				{
 					mp->verts[j].modulate[0] = mp->color[0] * fade;
 					mp->verts[j].modulate[1] = mp->color[1] * fade;
 					mp->verts[j].modulate[2] = mp->color[2] * fade;
-				   }
-			   }
-		   }
+				}
+			}
+		}
+
+		// Fade out marks
+		if( t < MARK_FADE_TIME )
+		{
+			fade = 255 * t / MARK_FADE_TIME;
+			if( mp->alphaFade )
+			{
+				for( j = 0; j < mp->poly.numVerts; j++ )
+				{
+					mp->verts[j].modulate[3] = fade;
+				}
+			}
+			else
+			{
+				for( j = 0; j < mp->poly.numVerts; j++ )
+				{
+					mp->verts[j].modulate[0] = mp->color[0] * fade;
+					mp->verts[j].modulate[1] = mp->color[1] * fade;
+					mp->verts[j].modulate[2] = mp->color[2] * fade;
+				}
+			}
+		}
 
 		cgi.R_AddPolyToScene( mp->markShader, mp->poly.numVerts, mp->verts, 0 );
 	}
 }
-

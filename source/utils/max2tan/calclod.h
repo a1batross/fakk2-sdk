@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 //
 //  $Logfile:: /FAKK2/code/game/actor.cpp                        $
 // $Revision:: 3                                                              $
@@ -26,13 +26,10 @@ extern "C" {
 
 #include "tikidata.h"
 
-void CalculateLOD
-   (
-   md3SurfaceData_t *surf
-   );
+void CalculateLOD( md3SurfaceData_t *surf );
 
 #ifdef __cplusplus
-   }
+}
 #endif
 
 #endif

@@ -14,12 +14,12 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CDlgeditApp
 
-BEGIN_MESSAGE_MAP(CDlgeditApp, CWinApp)
-	//{{AFX_MSG_MAP(CDlgeditApp)
-		// NOTE - the ClassWizard will add and remove mapping macros here.
-		//    DO NOT EDIT what you see in these blocks of generated code!
-	//}}AFX_MSG
-	ON_COMMAND(ID_HELP, CWinApp::OnHelp)
+BEGIN_MESSAGE_MAP( CDlgeditApp, CWinApp )
+// {{AFX_MSG_MAP(CDlgeditApp)
+// NOTE - the ClassWizard will add and remove mapping macros here.
+//    DO NOT EDIT what you see in these blocks of generated code!
+// }}AFX_MSG
+ON_COMMAND( ID_HELP, CWinApp::OnHelp )
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -47,20 +47,20 @@ BOOL CDlgeditApp::InitInstance()
 	//  the specific initialization routines you do not need.
 
 #ifdef _AFXDLL
-	Enable3dControls();			// Call this when using MFC in a shared DLL
+	Enable3dControls(); // Call this when using MFC in a shared DLL
 #else
-	Enable3dControlsStatic();	// Call this when linking to MFC statically
+	Enable3dControlsStatic(); // Call this when linking to MFC statically
 #endif
 
 	CDlgeditDlg dlg;
 	m_pMainWnd = &dlg;
-	int nResponse = dlg.DoModal();
-	if (nResponse == IDOK)
+	int         nResponse = dlg.DoModal();
+	if( nResponse == IDOK )
 	{
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with OK
 	}
-	else if (nResponse == IDCANCEL)
+	else if( nResponse == IDCANCEL )
 	{
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
