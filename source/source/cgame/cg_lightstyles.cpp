@@ -414,7 +414,7 @@ void createLightstyleFromTGA( int num, const char *filename )
 
 void CG_SetLightStyle( int num, const char *s )
 {
-	char  *r, *g, *b, *a;
+	const char  *r, *g, *b, *a;
 	int   j, k, n, len;
 	float t;
 

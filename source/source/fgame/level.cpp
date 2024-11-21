@@ -446,7 +446,7 @@ void Level::SpawnEntities( const char *themapname, const char *entities, int lev
 	int        inhibit, count = 0;
 	const char *value;
 	SpawnArgs  args;
-	char       *spawnpos;
+	const char *spawnpos;
 
 	// Init the level variables
 	Init();

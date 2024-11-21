@@ -867,7 +867,7 @@ void EventArgDef::Setup( const char *eventName, const char *argName, const char 
 {
 	char       scratch[ 256 ];
 	const char *ptr;
-	char       *tokptr;
+	const char *tokptr;
 	const char *endptr;
 	int        index;
 
@@ -950,7 +950,7 @@ void EventArgDef::Setup( const char *eventName, const char *argName, const char 
 				else
 					second = qfalse;
 				// zero out the ','
-				*tokptr = 0;
+				*(char*)tokptr = 0;
 				minRange[ index >> 1 ] = atof( scratch );
 				minRangeDefault[ index >> 1 ] = qfalse;
 				index++;
@@ -1131,7 +1131,7 @@ static Event *RealAllocateEvent( void )
 
 static void RealDeallocateEvent( Event *event )
 {
-	::delete[]((void *)event );
+	::delete[]((char *)event );
 	Event_totalmemallocated -= sizeof( Event );
 }
 
