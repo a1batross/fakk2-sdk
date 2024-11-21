@@ -117,7 +117,7 @@
 
 #include "g_local.h"
 #include "class.h"
-#include "Entity.h"
+#include "entity.h"
 #include "g_spawn.h"
 #include "navigate.h"
 #include "player.h"

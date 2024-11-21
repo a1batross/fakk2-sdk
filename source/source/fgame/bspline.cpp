@@ -67,7 +67,7 @@
 //
 
 #include "g_local.h"
-#include "BSpline.h"
+#include "bspline.h"
 
 void BSpline::Set( Vector *control_points_, int num_control_points_, splinetype_t type )
 {

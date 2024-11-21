@@ -31,7 +31,7 @@
 #define __CG_CLASS_H__
 
 #include "../fgame/q_shared.h"
-#include "../fgame/linklist.h"
+#include "linklist.h"
 
 class Class;
 class Event;

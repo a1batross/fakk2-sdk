@@ -1017,7 +1017,7 @@
 #include "scriptslave.h"
 #include "explosion.h"
 #include "misc.h"
-#include "playerstart.h"
+#include "PlayerStart.h"
 #include "characterstate.h"
 #include "weaputils.h"
 #include "shield.h"

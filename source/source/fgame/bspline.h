@@ -61,7 +61,7 @@
 #define __BSPLINE_H__
 
 #include "g_local.h"
-#include "Vector.h"
+#include "vector.h"
 
 typedef enum
 {

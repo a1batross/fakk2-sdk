@@ -30,7 +30,7 @@
 #include "cg_class.h"
 #include "cg_container.h"
 #include "cg_vector.h"
-#include "../fgame/str.h"
+#include "str.h"
 
 #ifndef __LISTENER_H__
 #define __LISTENER_H__

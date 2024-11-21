@@ -38,7 +38,9 @@
 #include "g_local.h"
 #include "class.h"
 #include "container.h"
-#include "navigate.h"
+
+class PathNode;
+typedef SafePtr<PathNode> PathNodePtr;
 
 class Path : public Class
 {

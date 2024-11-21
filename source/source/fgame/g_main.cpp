@@ -321,7 +321,7 @@
 #include "g_local.h"
 #include "g_utils.h"
 #include "gamecmds.h"
-#include "Entity.h"
+#include "entity.h"
 #include "vector.h"
 #include "scriptmaster.h"
 #include "navigate.h"

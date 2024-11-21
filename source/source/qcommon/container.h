@@ -61,7 +61,7 @@
 //
 // game dll specific defines
 //
-#include "g_local.h"
+extern game_import_t gi;
 
 #define CONTAINER_Error   gi.Error
 #define CONTAINER_DPrintf gi.DPrintf
