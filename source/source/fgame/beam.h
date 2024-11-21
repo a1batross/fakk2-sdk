@@ -89,6 +89,9 @@ extern Event EV_FuncBeam_ToggleDelay;
 extern Event EV_FuncBeam_FindEndpoint;
 extern Event EV_FuncBeam_EndAlpha;
 
+class FuncBeam;
+FuncBeam *CreateBeam( const char *model, const char *shader, Vector start, Vector end, int numsegments = 4, float scale = 1.0f, float life = 1.0f, float damage = 0.0f, Entity *origin_target = NULL );
+
 class FuncBeam : public ScriptSlave
 {
 protected:
@@ -138,7 +141,7 @@ public:
 	virtual void setAngles( Vector ang );
 	virtual void Archive( Archiver &arc );
 
-	friend FuncBeam *CreateBeam( const char *model, const char *shader, Vector start, Vector end, int numsegments = 4, float scale = 1.0f, float life = 1.0f, float damage = 0.0f, Entity *origin_target = NULL );
+	friend FuncBeam *CreateBeam( const char *model, const char *shader, Vector start, Vector end, int numsegments, float scale, float life, float damage, Entity *origin_target );
 };
 
 inline void FuncBeam::Archive( Archiver &arc )
