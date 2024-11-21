@@ -1434,7 +1434,7 @@ ScriptThread * ExecuteThread( str thread_name, qboolean start )
 		if( !s )
 		{
 			gi.DPrintf( "StartThread::Null game script\n" );
-			return false;
+			return NULL;
 		}
 		pThread = Director.CreateThread( s, thread_name.c_str());
 		if( pThread )
