@@ -396,6 +396,10 @@ public:
 
 
 // interface functions
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 void L_ProcessPendingEvents( void );
 void L_ClearEventList( void );
 void L_InitEvents( void );
@@ -403,6 +407,10 @@ void L_ShutdownEvents( void );
 #ifdef GAME_DLL
 void L_ArchiveEvents( Archiver &arc );
 void L_UnarchiveEvents( Archiver &arc );
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 class Listener;
