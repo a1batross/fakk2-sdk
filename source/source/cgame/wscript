@@ -12,8 +12,15 @@ def configure(conf):
 	pass
 
 def build(bld):
+	excluded_files = ['cg_syscalls.c']
+
+	source = bld.path.ant_glob('*.cpp *.c', excl=excluded_files)
+	source += bld.path.parent.ant_glob('qcommon/*.cpp')
+	source += ['../fgame/bg_misc.c', '../fgame/bg_pmove.c', '../fgame/q_math.c', '../fgame/q_mathsys.c', '../fgame/q_shared.c']
+
 	bld.shlib(target = 'cgamex86',
-		source = bld.path.ant_glob('*.cpp *.c') + bld.path.parent.ant_glob('fgame/bg_misc.c fgame/bg_pmove.c'),
+		source = source,
 		defines = 'CGAME_DLL',
-		includes = '. ../ ../fgame ../qcommon')
+		includes = '. ../ ../fgame ../qcommon',
+		idx = 0)
 

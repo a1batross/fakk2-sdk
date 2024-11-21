@@ -12,8 +12,14 @@ def configure(conf):
 	pass
 
 def build(bld):
+	excluded_files = ['testweapon.cpp', 'b_nav.cpp', 'b_navgen.cpp', 'deadbody.cpp', 'fists.cpp', 'bullet.cpp', 'b_files.cpp']
+
+	source = bld.path.ant_glob('*.cpp *.c', excl=excluded_files)
+	source += bld.path.parent.ant_glob('qcommon/*.cpp')
+
 	bld.shlib(target = 'fgamex86',
-		source = bld.path.ant_glob('*.cpp *.c'),
+		source = source,
 		defines = 'GAME_DLL FGAME_EXPORTS',
-		includes = '. ../ ../fgame ../qcommon')
+		includes = '. ../ ../fgame ../qcommon',
+		idx = 1)
 
