@@ -17,9 +17,11 @@ def build(bld):
 	source = bld.path.ant_glob('*.cpp *.c', excl=excluded_files)
 	source += bld.path.parent.ant_glob('qcommon/*.cpp')
 
-	bld.shlib(target = 'fgamex86',
+	bld.shlib(target = 'fgame',
 		source = source,
+		name = 'fgame',
 		defines = 'GAME_DLL FGAME_EXPORTS',
 		includes = '. ../ ../fgame ../qcommon',
+		install_path = 'fakk',
 		idx = 1)
 
