@@ -36,6 +36,9 @@ def configure(conf):
 	conf.env.append_unique('CXXFLAGS', cxxflags)
 	conf.env.append_unique('LINKFLAGS', linkflags)
 
+	if conf.env.cxxshlib_PATTERN.startswith('lib'):
+		conf.env.cxxshlib_PATTERN = conf.env.cxxshlib_PATTERN[3:]
+
 	conf.check_cc(lib='m')
 
 	conf.add_subproject('source/cgame')
