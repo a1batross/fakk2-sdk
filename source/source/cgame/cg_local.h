@@ -244,7 +244,7 @@
 // If you absolutely need something stored, it can either be kept
 // by the server in the server stored userinfos, or stashed in a cvar.
 
-
+#include "port.h"
 #include "../fgame/q_shared.h"
 #include "tr_types.h"
 #include "../fgame/bg_public.h"

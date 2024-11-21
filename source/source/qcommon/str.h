@@ -73,6 +73,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
+#include "port.h"
 
 #ifdef _WIN32
 #pragma warning(disable : 4710) // function 'blah' not inlined
@@ -117,7 +118,7 @@ public:
 };
 
 #if 1
-class __declspec( dllexport ) str
+class EXPORT str
 #else
 class str : public Class
 #endif

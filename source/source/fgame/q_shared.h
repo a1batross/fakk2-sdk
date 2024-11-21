@@ -471,6 +471,8 @@
 #include <time.h>
 #include <ctype.h>
 
+#include "port.h"
+
 #ifdef _WIN32
 
 // #pragma intrinsic( memset, memcpy )

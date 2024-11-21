@@ -57,6 +57,8 @@
 #ifndef __CONTAINER_H__
 #define __CONTAINER_H__
 
+#include "port.h"
+
 #if defined( GAME_DLL )
 //
 // game dll specific defines
