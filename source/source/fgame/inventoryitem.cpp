@@ -57,7 +57,7 @@ Event EV_InventoryItem_Use
 
 CLASS_DECLARATION( Item, InventoryItem, NULL )
 {
-	{ &EV_InventoryItem_Use, UseEvent },
+	{ &EV_InventoryItem_Use, &InventoryItem::UseEvent },
 	{ NULL, NULL }
 };
 
@@ -91,8 +91,8 @@ Event EV_AntiSBJuice_Wearoff
 
 CLASS_DECLARATION( InventoryItem, AntiSBJuice, "AntiSBJuice" )
 {
-	{ &EV_AntiSBJuice_Wearoff, Wearoff },
-	{ &EV_Use, UseEvent },
+	{ &EV_AntiSBJuice_Wearoff, &AntiSBJuice::Wearoff },
+	{ &EV_Use, &AntiSBJuice::UseEvent },
 	{ NULL, NULL }
 };
 

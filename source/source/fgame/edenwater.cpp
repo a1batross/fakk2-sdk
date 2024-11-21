@@ -55,7 +55,7 @@
 
 CLASS_DECLARATION( Item, EdenWater, "item_edenwater" )
 {
-	{ &EV_Item_Pickup, PickupEdenWater },
+	{ &EV_Item_Pickup, &EdenWater::PickupEdenWater },
 	{ NULL, NULL }
 };
 

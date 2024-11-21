@@ -55,7 +55,7 @@ Event EV_Soulsucker_WaterFactor
 
 CLASS_DECLARATION( Weapon, Soulsucker, NULL )
 {
-	{ &EV_Soulsucker_WaterFactor, WaterFactor },
+	{ &EV_Soulsucker_WaterFactor, &Soulsucker::WaterFactor },
 	{ NULL, NULL }
 };
 

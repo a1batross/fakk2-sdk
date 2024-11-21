@@ -558,19 +558,19 @@ Event EV_ExplodingWall_Setup
 
 CLASS_DECLARATION( Trigger, ExplodingWall, "func_explodingwall" )
 {
-	{ &EV_ExplodingWall_Setup, Setup },
-	{ &EV_Trigger_Effect, Explode },
-	{ &EV_Damage, DamageEvent },
-	{ &EV_Touch, TouchFunc },
-	{ &EV_ExplodingWall_StopRotating, StopRotating },
-	{ &EV_ExplodingWall_OnGround, CheckOnGround },
-	{ &EV_ExplodingWall_AngleSpeed, AngleSpeed },
-	{ &EV_ExplodingWall_LandRadius, LandRadius },
-	{ &EV_ExplodingWall_LandAngles, LandAngles },
-	{ &EV_ExplodingWall_BaseVelocity, BaseVelocity },
-	{ &EV_ExplodingWall_RandomVelocity, RandomVelocity },
-	{ &EV_ExplodingWall_SetDmg, SetDmg },
-	{ &EV_ExplodingWall_SetExplosions, SetExplosions },
+	{ &EV_ExplodingWall_Setup, &ExplodingWall::Setup },
+	{ &EV_Trigger_Effect, &ExplodingWall::Explode },
+	{ &EV_Damage, &ExplodingWall::DamageEvent },
+	{ &EV_Touch, &ExplodingWall::TouchFunc },
+	{ &EV_ExplodingWall_StopRotating, &ExplodingWall::StopRotating },
+	{ &EV_ExplodingWall_OnGround, &ExplodingWall::CheckOnGround },
+	{ &EV_ExplodingWall_AngleSpeed, &ExplodingWall::AngleSpeed },
+	{ &EV_ExplodingWall_LandRadius, &ExplodingWall::LandRadius },
+	{ &EV_ExplodingWall_LandAngles, &ExplodingWall::LandAngles },
+	{ &EV_ExplodingWall_BaseVelocity, &ExplodingWall::BaseVelocity },
+	{ &EV_ExplodingWall_RandomVelocity, &ExplodingWall::RandomVelocity },
+	{ &EV_ExplodingWall_SetDmg, &ExplodingWall::SetDmg },
+	{ &EV_ExplodingWall_SetExplosions, &ExplodingWall::SetExplosions },
 	{ NULL, NULL }
 };
 
@@ -980,10 +980,10 @@ Event EV_Teleporter_SetThread
 
 CLASS_DECLARATION( Trigger, Teleporter, "trigger_teleport" )
 {
-	{ &EV_Trigger_Effect, StartTeleport },
-	{ &EV_Teleporter_Teleport, Teleport },
-	{ &EV_Teleporter_StopTeleport, StopTeleport },
-	{ &EV_Teleporter_SetThread, SetThread },
+	{ &EV_Trigger_Effect, &Teleporter::StartTeleport },
+	{ &EV_Teleporter_Teleport, &Teleporter::Teleport },
+	{ &EV_Teleporter_StopTeleport, &Teleporter::StopTeleport },
+	{ &EV_Teleporter_SetThread, &Teleporter::SetThread },
 	{ NULL, NULL }
 };
 
@@ -1261,7 +1261,7 @@ Point trigger_teleport at these.
 
 CLASS_DECLARATION( Entity, TeleporterDestination, "func_teleportdest" )
 {
-	{ &EV_SetAngle, SetMoveDir },
+	{ &EV_SetAngle, &TeleporterDestination::SetMoveDir },
 	{ NULL, NULL }
 };
 
@@ -1397,16 +1397,16 @@ Event EV_UseAnim_SetDelay
 CLASS_DECLARATION( Entity, UseAnim, "func_useanim" )
 {
 	{ &EV_Use, NULL },
-	{ &EV_Touch, Touched },
-	{ &EV_UseAnim_Reset, Reset },
-	{ &EV_UseAnim_Thread, SetThread },
-	{ &EV_UseAnim_TriggerTarget, SetTriggerTarget },
-	{ &EV_UseAnim_Count, SetCount },
-	{ &EV_UseAnim_SetAnim, SetAnim },
-	{ &EV_UseAnim_SetState, SetState },
-	{ &EV_UseAnim_SetKey, SetKey },
-	{ &EV_UseAnim_SetNumLoops, SetNumLoops },
-	{ &EV_UseAnim_SetCamera, SetCamera },
+	{ &EV_Touch, &UseAnim::Touched },
+	{ &EV_UseAnim_Reset, &UseAnim::Reset },
+	{ &EV_UseAnim_Thread, &UseAnim::SetThread },
+	{ &EV_UseAnim_TriggerTarget, &UseAnim::SetTriggerTarget },
+	{ &EV_UseAnim_Count, &UseAnim::SetCount },
+	{ &EV_UseAnim_SetAnim, &UseAnim::SetAnim },
+	{ &EV_UseAnim_SetState, &UseAnim::SetState },
+	{ &EV_UseAnim_SetKey, &UseAnim::SetKey },
+	{ &EV_UseAnim_SetNumLoops, &UseAnim::SetNumLoops },
+	{ &EV_UseAnim_SetCamera, &UseAnim::SetCamera },
 	{ NULL, NULL }
 };
 
@@ -1835,9 +1835,9 @@ and placed into the specified animation
 
 CLASS_DECLARATION( Entity, UseAnimDestination, "func_useanimdest" )
 {
-	{ &EV_UseAnim_SetAnim, SetAnim },
-	{ &EV_UseAnim_SetState, SetState },
-	{ &EV_UseAnim_SetNumLoops, SetNumLoops },
+	{ &EV_UseAnim_SetAnim, &UseAnimDestination::SetAnim },
+	{ &EV_UseAnim_SetState, &UseAnimDestination::SetState },
+	{ &EV_UseAnim_SetNumLoops, &UseAnimDestination::SetNumLoops },
 	{ NULL, NULL }
 };
 
@@ -2108,26 +2108,26 @@ off state after a preset amount of time.  When multi-state is set this must be d
 CLASS_DECLARATION( Animate, UseObject, "func_useobject" )
 {
 	{ &EV_Use, NULL },
-	{ &EV_UseObject_MoveThread, SetMoveThread },
-	{ &EV_UseObject_StopThread, SetStopThread },
-	{ &EV_UseObject_ResetThread, SetResetThread },
-	{ &EV_UseObject_TriggerTarget, SetTriggerTarget },
-	{ &EV_UseObject_Offset, SetOffset },
-	{ &EV_UseObject_YawOffset, SetYawOffset },
-	{ &EV_UseObject_Count, SetCount },
-	{ &EV_UseObject_Cone, SetCone },
-	{ &EV_UseObject_State, SetState },
-	{ &EV_UseObject_StateBackwards, SetBackwardsState },
-	{ &EV_UseObject_ResetTime, SetResetTime },
-	{ &EV_UseObject_Reset, Reset },
-	{ &EV_UseObject_DamageType, DamageType },
-	{ &EV_UseObject_Resetting, Resetting },
-	{ &EV_UseObject_DamageTriggered, DamageTriggered },
-	{ &EV_Damage, DamageFunc },
-	{ &EV_UseObject_Activate, ActivateEvent },
-	{ &EV_UseObject_Deactivate, DeactivateEvent },
-	{ &EV_UseObject_UseMaterial, UseMaterialEvent },
-	{ &EV_UseObject_SetActiveState, SetActiveState },
+	{ &EV_UseObject_MoveThread, &UseObject::SetMoveThread },
+	{ &EV_UseObject_StopThread, &UseObject::SetStopThread },
+	{ &EV_UseObject_ResetThread, &UseObject::SetResetThread },
+	{ &EV_UseObject_TriggerTarget, &UseObject::SetTriggerTarget },
+	{ &EV_UseObject_Offset, &UseObject::SetOffset },
+	{ &EV_UseObject_YawOffset, &UseObject::SetYawOffset },
+	{ &EV_UseObject_Count, &UseObject::SetCount },
+	{ &EV_UseObject_Cone, &UseObject::SetCone },
+	{ &EV_UseObject_State, &UseObject::SetState },
+	{ &EV_UseObject_StateBackwards, &UseObject::SetBackwardsState },
+	{ &EV_UseObject_ResetTime, &UseObject::SetResetTime },
+	{ &EV_UseObject_Reset, &UseObject::Reset },
+	{ &EV_UseObject_DamageType, &UseObject::DamageType },
+	{ &EV_UseObject_Resetting, &UseObject::Resetting },
+	{ &EV_UseObject_DamageTriggered, &UseObject::DamageTriggered },
+	{ &EV_Damage, &UseObject::DamageFunc },
+	{ &EV_UseObject_Activate, &UseObject::ActivateEvent },
+	{ &EV_UseObject_Deactivate, &UseObject::DeactivateEvent },
+	{ &EV_UseObject_UseMaterial, &UseObject::UseMaterialEvent },
+	{ &EV_UseObject_SetActiveState, &UseObject::SetActiveState },
 	{ NULL, NULL }
 };
 
@@ -2576,7 +2576,7 @@ Monkey bars
 
 CLASS_DECLARATION( Entity, MonkeyBars, "func_monkeybars" )
 {
-	{ &EV_SetAngle, SetAngleEvent },
+	{ &EV_SetAngle, &MonkeyBars::SetAngleEvent },
 	{ NULL, NULL }
 };
 
@@ -2607,7 +2607,7 @@ Horizontal pipe that play can crawl upside down on.
 
 CLASS_DECLARATION( Entity, HorizontalPipe, "func_horizontalpipe" )
 {
-	{ &EV_SetAngle, SetAngleEvent },
+	{ &EV_SetAngle, &HorizontalPipe::SetAngleEvent },
 	{ NULL, NULL }
 };
 
@@ -2653,10 +2653,10 @@ Event EV_TossObject_SetBounceSoundChance
 
 CLASS_DECLARATION( Animate, TossObject, "TossObject" )
 {
-	{ &EV_Touch, Touch },
-	{ &EV_Stop, Stop },
-	{ &EV_TossObject_SetBounceSound, SetBounceSound },
-	{ &EV_TossObject_SetBounceSoundChance, SetBounceSoundChance },
+	{ &EV_Touch, &TossObject::Touch },
+	{ &EV_Stop, &TossObject::Stop },
+	{ &EV_TossObject_SetBounceSound, &TossObject::SetBounceSound },
+	{ &EV_TossObject_SetBounceSoundChance, &TossObject::SetBounceSoundChance },
 	{ NULL, NULL }
 };
 
@@ -2805,10 +2805,10 @@ Event EV_PushObject_SetPushSound
 
 CLASS_DECLARATION( Entity, PushObject, "func_pushobject" )
 {
-	{ &EV_PushObject_Start, Start },
-	{ &EV_Blocked, BlockFunc },
-	{ &EV_PushObject_SetDamage, SetDamage },
-	{ &EV_PushObject_SetPushSound, SetPushSound },
+	{ &EV_PushObject_Start, &PushObject::Start },
+	{ &EV_Blocked, &PushObject::BlockFunc },
+	{ &EV_PushObject_SetDamage, &PushObject::SetDamage },
+	{ &EV_PushObject_SetPushSound, &PushObject::SetPushSound },
 	{ NULL, NULL }
 };
 
@@ -2996,15 +2996,15 @@ Event EV_FallingRock_SetBounceSound
 
 CLASS_DECLARATION( Entity, FallingRock, "func_fallingrock" )
 {
-	{ &EV_Activate, Activate },
-	{ &EV_Touch, Touch },
-	{ &EV_FallingRock_Bounce, Bounce },
-	{ &EV_FallingRock_Rotate, Rotate },
-	{ &EV_FallingRock_Start, StartFalling },
-	{ &EV_FallingRock_SetWait, SetWait },
-	{ &EV_FallingRock_SetSpeed, SetSpeed },
-	{ &EV_FallingRock_SetDmg, SetDmg },
-	{ &EV_FallingRock_SetBounceSound, SetBounceSound },
+	{ &EV_Activate, &FallingRock::Activate },
+	{ &EV_Touch, &FallingRock::Touch },
+	{ &EV_FallingRock_Bounce, &FallingRock::Bounce },
+	{ &EV_FallingRock_Rotate, &FallingRock::Rotate },
+	{ &EV_FallingRock_Start, &FallingRock::StartFalling },
+	{ &EV_FallingRock_SetWait, &FallingRock::SetWait },
+	{ &EV_FallingRock_SetSpeed, &FallingRock::SetSpeed },
+	{ &EV_FallingRock_SetDmg, &FallingRock::SetDmg },
+	{ &EV_FallingRock_SetBounceSound, &FallingRock::SetBounceSound },
 	{ NULL, NULL }
 };
 
@@ -3306,9 +3306,9 @@ Event EV_SupplyWater_ChargeOff
 
 CLASS_DECLARATION( Trigger, SupplyWater, "func_supplywater" )
 {
-	{ &EV_Trigger_Effect, Activate },
-	{ &EV_SupplyWater_MaxWater, MaxWater },
-	{ &EV_SupplyWater_ChargeOff, ChargeOff },
+	{ &EV_Trigger_Effect, &SupplyWater::Activate },
+	{ &EV_SupplyWater_MaxWater, &SupplyWater::MaxWater },
+	{ &EV_SupplyWater_ChargeOff, &SupplyWater::ChargeOff },
 	{ NULL, NULL }
 };
 

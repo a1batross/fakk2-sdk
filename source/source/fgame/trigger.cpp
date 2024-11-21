@@ -432,27 +432,27 @@ set "message" to text string
 
 CLASS_DECLARATION( Animate, Trigger, "trigger_multiple" )
 {
-	{ &EV_Trigger_SetWait, EventSetWait },
-	{ &EV_Trigger_SetDelay, EventSetDelay },
-	{ &EV_Trigger_SetCount, EventSetCount },
-	{ &EV_Trigger_SetMessage, EventSetMessage },
-	{ &EV_Trigger_SetNoise, EventSetNoise },
-	{ &EV_Trigger_SetSound, EventSetNoise },
-	{ &EV_Trigger_SetThread, EventSetThread },
-	{ &EV_SetHealth, EventSetHealth },
-	{ &EV_Touch, TriggerStuff },
-	{ &EV_Killed, TriggerStuff },
-	{ &EV_Activate, TriggerStuff },
-	{ &EV_Trigger_ActivateTargets, ActivateTargets },
-	{ &EV_Trigger_SetKey, EventSetKey },
-	{ &EV_Trigger_StartThread, StartThread },
-	{ &EV_Model, SetModelEvent },
-	{ &EV_SetAngle, SetTriggerDir },
-	{ &EV_Trigger_SetTriggerable, SetTriggerable },
-	{ &EV_Trigger_SetNotTriggerable, SetNotTriggerable },
-	{ &EV_Trigger_SetMultiFaceted, SetMultiFaceted },
-	{ &EV_Trigger_SetEdgeTriggered, SetEdgeTriggered },
-	{ &EV_Trigger_SetTriggerCone, SetTriggerCone },
+	{ &EV_Trigger_SetWait, &Trigger::EventSetWait },
+	{ &EV_Trigger_SetDelay, &Trigger::EventSetDelay },
+	{ &EV_Trigger_SetCount, &Trigger::EventSetCount },
+	{ &EV_Trigger_SetMessage, &Trigger::EventSetMessage },
+	{ &EV_Trigger_SetNoise, &Trigger::EventSetNoise },
+	{ &EV_Trigger_SetSound, &Trigger::EventSetNoise },
+	{ &EV_Trigger_SetThread, &Trigger::EventSetThread },
+	{ &EV_SetHealth, &Trigger::EventSetHealth },
+	{ &EV_Touch, &Trigger::TriggerStuff },
+	{ &EV_Killed, &Trigger::TriggerStuff },
+	{ &EV_Activate, &Trigger::TriggerStuff },
+	{ &EV_Trigger_ActivateTargets, &Trigger::ActivateTargets },
+	{ &EV_Trigger_SetKey, &Trigger::EventSetKey },
+	{ &EV_Trigger_StartThread, &Trigger::StartThread },
+	{ &EV_Model, &Trigger::SetModelEvent },
+	{ &EV_SetAngle, &Trigger::SetTriggerDir },
+	{ &EV_Trigger_SetTriggerable, &Trigger::SetTriggerable },
+	{ &EV_Trigger_SetNotTriggerable, &Trigger::SetNotTriggerable },
+	{ &EV_Trigger_SetMultiFaceted, &Trigger::SetMultiFaceted },
+	{ &EV_Trigger_SetEdgeTriggered, &Trigger::SetEdgeTriggered },
+	{ &EV_Trigger_SetTriggerCone, &Trigger::SetTriggerCone },
 	{ NULL, NULL }
 };
 
@@ -1017,7 +1017,7 @@ void Trigger::SetNotTriggerable( Event *ev )
 
 CLASS_DECLARATION( Trigger, TouchField, NULL )
 {
-	{ &EV_Trigger_Effect, SendEvent },
+	{ &EV_Trigger_Effect, &TouchField::SendEvent },
 	{ NULL, NULL }
 };
 
@@ -1182,7 +1182,7 @@ If PROJECTILES is set, the trigger will respond to projectiles (rockets, grenade
 
 CLASS_DECLARATION( TriggerOnce, TriggerSecret, "trigger_secret" )
 {
-	{ &EV_Trigger_Effect, FoundSecret },
+	{ &EV_Trigger_Effect, &TriggerSecret::FoundSecret },
 	{ NULL, NULL }
 };
 
@@ -1283,9 +1283,9 @@ Event EV_TriggerSetVariable_SetVariableValue
 );
 CLASS_DECLARATION( Trigger, TriggerSetVariable, "trigger_setvariable" )
 {
-	{ &EV_Trigger_Effect, SetVariable },
-	{ &EV_TriggerSetVariable_SetVariable, SetVariableName },
-	{ &EV_TriggerSetVariable_SetVariableValue, SetVariableValue },
+	{ &EV_Trigger_Effect, &TriggerSetVariable::SetVariable },
+	{ &EV_TriggerSetVariable_SetVariable, &TriggerSetVariable::SetVariableName },
+	{ &EV_TriggerSetVariable_SetVariableValue, &TriggerSetVariable::SetVariableValue },
 	{ NULL, NULL }
 };
 
@@ -1421,9 +1421,9 @@ Event EV_TriggerPush_SetPushSpeed
 
 CLASS_DECLARATION( Trigger, TriggerPush, "trigger_push" )
 {
-	{ &EV_Trigger_Effect, Push },
-	{ &EV_SetAngle, SetPushDir },
-	{ &EV_TriggerPush_SetPushSpeed, SetPushSpeed },
+	{ &EV_Trigger_Effect, &TriggerPush::Push },
+	{ &EV_SetAngle, &TriggerPush::SetPushDir },
+	{ &EV_TriggerPush_SetPushSpeed, &TriggerPush::SetPushSpeed },
 	{ NULL, NULL }
 };
 
@@ -1521,8 +1521,8 @@ Event EV_TriggerPushAny_SetSpeed
 
 CLASS_DECLARATION( Trigger, TriggerPushAny, "trigger_pushany" )
 {
-	{ &EV_TriggerPushAny_SetSpeed, SetSpeed },
-	{ &EV_Trigger_Effect, Push },
+	{ &EV_TriggerPushAny_SetSpeed, &TriggerPushAny::SetSpeed },
+	{ &EV_Trigger_Effect, &TriggerPushAny::Push },
 	{ NULL, NULL }
 };
 
@@ -1606,10 +1606,10 @@ Event EV_TriggerPlaySound_SetChannel
 
 CLASS_DECLARATION( Trigger, TriggerPlaySound, "play_sound_triggered" )
 {
-	{ &EV_Trigger_Effect, ToggleSound },
-	{ &EV_TriggerPlaySound_SetVolume, SetVolume },
-	{ &EV_TriggerPlaySound_SetMinDist, SetMinDist },
-	{ &EV_TriggerPlaySound_SetChannel, SetChannel },
+	{ &EV_Trigger_Effect, &TriggerPlaySound::ToggleSound },
+	{ &EV_TriggerPlaySound_SetVolume, &TriggerPlaySound::SetVolume },
+	{ &EV_TriggerPlaySound_SetMinDist, &TriggerPlaySound::SetMinDist },
+	{ &EV_TriggerPlaySound_SetChannel, &TriggerPlaySound::SetChannel },
 	{ &EV_Touch, NULL },
 	{ NULL, NULL }
 };
@@ -1811,10 +1811,10 @@ Event EV_Trigger_SetChance
 
 CLASS_DECLARATION( TriggerSpeaker, RandomSpeaker, "sound_randomspeaker" )
 {
-	{ &EV_Trigger_Effect, TriggerSound },
-	{ &EV_Trigger_SetMinDelay, SetMinDelay },
-	{ &EV_Trigger_SetMaxDelay, SetMaxDelay },
-	{ &EV_Trigger_SetChance, SetChance },
+	{ &EV_Trigger_Effect, &RandomSpeaker::TriggerSound },
+	{ &EV_Trigger_SetMinDelay, &RandomSpeaker::SetMinDelay },
+	{ &EV_Trigger_SetMaxDelay, &RandomSpeaker::SetMaxDelay },
+	{ &EV_Trigger_SetChance, &RandomSpeaker::SetChance },
 	{ &EV_Touch, NULL },
 	{ NULL, NULL }
 };
@@ -1917,10 +1917,10 @@ Event EV_TriggerChangeLevel_SpawnSpot
 
 CLASS_DECLARATION( Trigger, TriggerChangeLevel, "trigger_changelevel" )
 {
-	{ &EV_Trigger_Effect, ChangeLevel },
-	{ &EV_TriggerChangeLevel_Map, SetMap },
-	{ &EV_TriggerChangeLevel_SpawnSpot, SetSpawnSpot },
-	{ &EV_Trigger_SetThread, SetThread },
+	{ &EV_Trigger_Effect, &TriggerChangeLevel::ChangeLevel },
+	{ &EV_TriggerChangeLevel_Map, &TriggerChangeLevel::SetMap },
+	{ &EV_TriggerChangeLevel_SpawnSpot,&TriggerChangeLevel::SetSpawnSpot },
+	{ &EV_Trigger_SetThread, &TriggerChangeLevel::SetThread },
 	{ NULL, NULL }
 };
 
@@ -2022,7 +2022,7 @@ If MONSTERS is set, the trigger will respond to monsters
 
 CLASS_DECLARATION( Trigger, TriggerUse, "trigger_use" )
 {
-	{ &EV_Use, TriggerStuff },
+	{ &EV_Use, &TriggerUse::TriggerStuff },
 	{ &EV_Touch, NULL },
 	{ NULL, NULL }
 };
@@ -2116,10 +2116,10 @@ Event EV_TriggerHurt_SetDamageType
 
 CLASS_DECLARATION( TriggerUse, TriggerHurt, "trigger_hurt" )
 {
-	{ &EV_Trigger_Effect, Hurt },
-	{ &EV_TriggerHurt_SetDamage, SetDamage },
-	{ &EV_TriggerHurt_SetDamageType, DamageType },
-	{ &EV_Touch, Trigger::TriggerStuff },
+	{ &EV_Trigger_Effect, &TriggerHurt::Hurt },
+	{ &EV_TriggerHurt_SetDamage, &TriggerHurt::SetDamage },
+	{ &EV_TriggerHurt_SetDamageType, &TriggerHurt::DamageType },
+	{ &EV_Touch, &TriggerHurt::TriggerStuff },
 	{ NULL, NULL }
 };
 
@@ -2184,9 +2184,9 @@ Event EV_TriggerDamageTargets_SetDamage
 
 CLASS_DECLARATION( Trigger, TriggerDamageTargets, "trigger_damagetargets" )
 {
-	{ &EV_Trigger_ActivateTargets, DamageTargets },
-	{ &EV_TriggerDamageTargets_SetDamage, SetDamage },
-	{ &EV_Damage, PassDamage },
+	{ &EV_Trigger_ActivateTargets, &TriggerDamageTargets::DamageTargets },
+	{ &EV_TriggerDamageTargets_SetDamage, &TriggerDamageTargets::SetDamage },
+	{ &EV_Damage, &TriggerDamageTargets::PassDamage },
 	{ &EV_Touch, NULL },
 	{ NULL, NULL }
 };
@@ -2341,7 +2341,7 @@ If MONSTERS is set, the trigger will respond to monsters
 
 CLASS_DECLARATION( TriggerUse, TriggerCameraUse, "trigger_camerause" )
 {
-	{ &EV_Use, TriggerCamera },
+	{ &EV_Use, &TriggerCameraUse::TriggerCamera },
 	{ &EV_Touch, NULL },
 	{ NULL, NULL }
 };
@@ -2430,8 +2430,8 @@ Event EV_TriggerExit_TurnExitOff
 
 CLASS_DECLARATION( Trigger, TriggerExit, "trigger_exit" )
 {
-	{ &EV_Trigger_Effect, DisplayExitSign },
-	{ &EV_TriggerExit_TurnExitOff, TurnExitSignOff },
+	{ &EV_Trigger_Effect, &TriggerExit::DisplayExitSign },
+	{ &EV_TriggerExit_TurnExitOff, &TriggerExit::TurnExitSignOff },
 	{ NULL, NULL }
 };
 
@@ -2499,8 +2499,8 @@ Event EV_TriggerBox_SetMaxs
 
 CLASS_DECLARATION( Trigger, TriggerBox, "trigger_box" )
 {
-	{ &EV_TriggerBox_SetMins, SetMins },
-	{ &EV_TriggerBox_SetMaxs, SetMaxs },
+	{ &EV_TriggerBox_SetMins, &TriggerBox::SetMins },
+	{ &EV_TriggerBox_SetMaxs, &TriggerBox::SetMaxs },
 	{ NULL, NULL }
 };
 
@@ -2604,13 +2604,13 @@ Event EV_TriggerMusic_OneShot
 
 CLASS_DECLARATION( Trigger, TriggerMusic, "trigger_music" )
 {
-	{ &EV_TriggerMusic_CurrentMood, SetCurrentMood },
-	{ &EV_TriggerMusic_FallbackMood, SetFallbackMood },
-	{ &EV_TriggerMusic_AltCurrentMood, SetAltCurrentMood },
-	{ &EV_TriggerMusic_AltFallbackMood, SetAltFallbackMood },
-	{ &EV_TriggerMusic_OneShot, SetOneShot },
-	{ &EV_Trigger_Effect, ChangeMood },
-	{ &EV_Trigger_Effect_Alt, AltChangeMood },
+	{ &EV_TriggerMusic_CurrentMood, &TriggerMusic::SetCurrentMood },
+	{ &EV_TriggerMusic_FallbackMood, &TriggerMusic::SetFallbackMood },
+	{ &EV_TriggerMusic_AltCurrentMood, &TriggerMusic::SetAltCurrentMood },
+	{ &EV_TriggerMusic_AltFallbackMood, &TriggerMusic::SetAltFallbackMood },
+	{ &EV_TriggerMusic_OneShot, &TriggerMusic::SetOneShot },
+	{ &EV_Trigger_Effect, &TriggerMusic::ChangeMood },
+	{ &EV_Trigger_Effect_Alt, &TriggerMusic::AltChangeMood },
 	{ NULL, NULL }
 };
 
@@ -2797,13 +2797,13 @@ Event EV_TriggerReverb_OneShot
 
 CLASS_DECLARATION( Trigger, TriggerReverb, "trigger_music" )
 {
-	{ &EV_TriggerReverb_ReverbType, SetReverbType },
-	{ &EV_TriggerReverb_ReverbLevel, SetReverbLevel },
-	{ &EV_TriggerReverb_AltReverbType, SetAltReverbType },
-	{ &EV_TriggerReverb_AltReverbLevel, SetAltReverbLevel },
-	{ &EV_TriggerReverb_OneShot, SetOneShot },
-	{ &EV_Trigger_Effect, ChangeReverb },
-	{ &EV_Trigger_Effect_Alt, AltChangeReverb },
+	{ &EV_TriggerReverb_ReverbType, &TriggerReverb::SetReverbType },
+	{ &EV_TriggerReverb_ReverbLevel, &TriggerReverb::SetReverbLevel },
+	{ &EV_TriggerReverb_AltReverbType, &TriggerReverb::SetAltReverbType },
+	{ &EV_TriggerReverb_AltReverbLevel, &TriggerReverb::SetAltReverbLevel },
+	{ &EV_TriggerReverb_OneShot, &TriggerReverb::SetOneShot },
+	{ &EV_Trigger_Effect, &TriggerReverb::ChangeReverb },
+	{ &EV_Trigger_Effect_Alt, &TriggerReverb::AltChangeReverb },
 	{ NULL, NULL }
 };
 
@@ -2940,7 +2940,7 @@ Event EV_TriggerByPushObject_TriggerName
 
 CLASS_DECLARATION( TriggerOnce, TriggerByPushObject, "trigger_pushobject" )
 {
-	{ &EV_TriggerByPushObject_TriggerName, setTriggerName },
+	{ &EV_TriggerByPushObject_TriggerName, &TriggerByPushObject::setTriggerName },
 	{ NULL, NULL }
 };
 
@@ -3013,9 +3013,9 @@ Event EV_TriggerGivePowerup_PowerupName
 
 CLASS_DECLARATION( Trigger, TriggerGivePowerup, "trigger_givepowerup" )
 {
-	{ &EV_TriggerGivePowerup_OneShot, SetOneShot },
-	{ &EV_TriggerGivePowerup_PowerupName, SetPowerupName },
-	{ &EV_Trigger_Effect, GivePowerup },
+	{ &EV_TriggerGivePowerup_OneShot, &TriggerGivePowerup::SetOneShot },
+	{ &EV_TriggerGivePowerup_PowerupName, &TriggerGivePowerup::SetPowerupName },
+	{ &EV_Trigger_Effect, &TriggerGivePowerup::GivePowerup },
 	{ NULL, NULL }
 };
 

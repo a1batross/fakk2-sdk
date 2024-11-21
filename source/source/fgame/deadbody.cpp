@@ -37,7 +37,7 @@
 
 CLASS_DECLARATION( Sentient, Deadbody, "deadbody" )
 {
-	{ &EV_Gib, GibEvent },
+	{ &EV_Gib, &Deadbody::GibEvent },
 	{ NULL, NULL }
 };
 

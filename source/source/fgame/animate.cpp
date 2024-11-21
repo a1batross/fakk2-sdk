@@ -255,17 +255,17 @@ Event EV_NewAnim
 
 CLASS_DECLARATION( Entity, Animate, "animate" )
 {
-	{ &EV_Anim, Legs_AnimEvent },
-	{ &EV_SetFrame, Legs_SetFrameEvent },
-	{ &EV_AnimDone, Legs_AnimDoneEvent },
-	{ &EV_StopAnimating, Legs_StopAnimating },
-	{ &EV_FrameDelta, FrameDeltaEvent },
-	{ &EV_NewAnim, NewAnimEvent },
+	{ &EV_Anim, &Animate::Legs_AnimEvent },
+	{ &EV_SetFrame, &Animate::Legs_SetFrameEvent },
+	{ &EV_AnimDone, &Animate::Legs_AnimDoneEvent },
+	{ &EV_StopAnimating, &Animate::Legs_StopAnimating },
+	{ &EV_FrameDelta, &Animate::FrameDeltaEvent },
+	{ &EV_NewAnim, &Animate::NewAnimEvent },
 
-	{ &EV_Torso_Anim, Torso_AnimEvent },
-	{ &EV_Torso_SetFrame, Torso_SetFrameEvent },
-	{ &EV_Torso_AnimDone, Torso_AnimDoneEvent },
-	{ &EV_Torso_StopAnimating, Torso_StopAnimating },
+	{ &EV_Torso_Anim, &Animate::Torso_AnimEvent },
+	{ &EV_Torso_SetFrame, &Animate::Torso_SetFrameEvent },
+	{ &EV_Torso_AnimDone, &Animate::Torso_AnimDoneEvent },
+	{ &EV_Torso_StopAnimating, &Animate::Torso_StopAnimating },
 
 	{ NULL, NULL }
 };

@@ -57,9 +57,9 @@ Event EV_ClusterBomb_ClusterCount
 
 CLASS_DECLARATION( Projectile, ClusterBomb, NULL )
 {
-	{ &EV_ClusterBomb_Think, Think },
-	{ &EV_ClusterBomb_ClusterCount, ClusterCount },
-	{ &EV_ClusterBomb_ClusterModel, ClusterModel },
+	{ &EV_ClusterBomb_Think, &ClusterBomb::Think },
+	{ &EV_ClusterBomb_ClusterCount, &ClusterBomb::ClusterCount },
+	{ &EV_ClusterBomb_ClusterModel, &ClusterBomb::ClusterModel },
 	{ NULL, NULL }
 };
 

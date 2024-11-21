@@ -68,7 +68,7 @@ Event EV_Portal_LocateCamera
 
 CLASS_DECLARATION( Entity, PortalSurface, "portal_surface" )
 {
-	{ &EV_Portal_LocateCamera, LocateCamera },
+	{ &EV_Portal_LocateCamera, &PortalSurface::LocateCamera },
 	{ NULL, NULL }
 };
 
@@ -153,7 +153,7 @@ Event EV_Portal_Roll
 
 CLASS_DECLARATION( Entity, PortalCamera, "portal_camera" )
 {
-	{ &EV_Portal_Roll, Roll },
+	{ &EV_Portal_Roll, &PortalCamera::Roll },
 	{ NULL, NULL }
 };
 

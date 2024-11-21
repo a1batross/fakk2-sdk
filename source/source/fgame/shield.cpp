@@ -39,7 +39,7 @@ Event EV_Shield_DamageReduction
 
 CLASS_DECLARATION( Weapon, Shield, NULL )
 {
-	{ &EV_Shield_DamageReduction, DamageReduction },
+	{ &EV_Shield_DamageReduction, &Shield::DamageReduction },
 	{ NULL, NULL }
 };
 

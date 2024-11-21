@@ -269,23 +269,23 @@ CLASS_DECLARATION( VehicleBase, FrontWheels, "script_wheelsfront" )
 
 CLASS_DECLARATION( VehicleBase, Vehicle, "script_vehicle" )
 {
-	{ &EV_Blocked, VehicleBlocked },
-	{ &EV_Touch, VehicleTouched },
-	{ &EV_Use, DriverUse },
-	{ &EV_Vehicle_Start, VehicleStart },
-	{ &EV_Vehicle_Drivable, Drivable },
-	{ &EV_Vehicle_UnDrivable, UnDrivable },
-	{ &EV_Vehicle_Jumpable, Jumpable },
-	{ &EV_Vehicle_SeatAnglesOffset, SeatAnglesOffset },
-	{ &EV_Vehicle_SeatOffset, SeatOffset },
-	{ &EV_Vehicle_Lock, Lock },
-	{ &EV_Vehicle_UnLock, UnLock },
-	{ &EV_Vehicle_SetWeapon, SetWeapon },
-	{ &EV_Vehicle_DriverAnimation, DriverAnimation },
-	{ &EV_Vehicle_SetSpeed, SetSpeed },
-	{ &EV_Vehicle_SetTurnRate, SetTurnRate },
-	{ &EV_Vehicle_SteerInPlace, SteerInPlace },
-	{ &EV_Vehicle_ShowWeapon, ShowWeaponEvent },
+	{ &EV_Blocked, &Vehicle::VehicleBlocked },
+	{ &EV_Touch, &Vehicle::VehicleTouched },
+	{ &EV_Use, &Vehicle::DriverUse },
+	{ &EV_Vehicle_Start, &Vehicle::VehicleStart },
+	{ &EV_Vehicle_Drivable, &Vehicle::Drivable },
+	{ &EV_Vehicle_UnDrivable, &Vehicle::UnDrivable },
+	{ &EV_Vehicle_Jumpable, &Vehicle::Jumpable },
+	{ &EV_Vehicle_SeatAnglesOffset, &Vehicle::SeatAnglesOffset },
+	{ &EV_Vehicle_SeatOffset, &Vehicle::SeatOffset },
+	{ &EV_Vehicle_Lock, &Vehicle::Lock },
+	{ &EV_Vehicle_UnLock, &Vehicle::UnLock },
+	{ &EV_Vehicle_SetWeapon, &Vehicle::SetWeapon },
+	{ &EV_Vehicle_DriverAnimation, &Vehicle::DriverAnimation },
+	{ &EV_Vehicle_SetSpeed, &Vehicle::SetSpeed },
+	{ &EV_Vehicle_SetTurnRate, &Vehicle::SetTurnRate },
+	{ &EV_Vehicle_SteerInPlace, &Vehicle::SteerInPlace },
+	{ &EV_Vehicle_ShowWeapon, &Vehicle::ShowWeaponEvent },
 	{ NULL, NULL }
 };
 
@@ -1053,8 +1053,8 @@ void Vehicle::SetTurnRate( Event *ev )
 
 CLASS_DECLARATION( Vehicle, DrivableVehicle, "script_drivablevehicle" )
 {
-	{ &EV_Damage, Entity::DamageEvent },
-	{ &EV_Killed, Killed },
+	{ &EV_Damage, &DrivableVehicle::DamageEvent },
+	{ &EV_Killed, &DrivableVehicle::Killed },
 	{ NULL, NULL }
 };
 

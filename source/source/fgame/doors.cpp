@@ -313,29 +313,29 @@ Door.enemy chains from the master door through all doors linked in the chain.
 
 CLASS_DECLARATION( ScriptSlave, Door, "NormalDoor" )
 {
-	{ &EV_Door_StopSound, SetStopSound },
-	{ &EV_Door_MoveSound, SetMoveSound },
-	{ &EV_Door_MessageSound, SetMessageSound },
-	{ &EV_Door_LockedSound, SetLockedSound },
-	{ &EV_Door_SetWait, SetWait },
-	{ &EV_Door_SetDmg, SetDmg },
-	{ &EV_Door_TriggerFieldTouched, FieldTouched },
-	{ &EV_Trigger_Effect, TryOpen },
-	{ &EV_Activate, TryOpen },
-	{ &EV_Door_TryOpen, TryOpen },
-	{ &EV_Door_Close, Close },
-	{ &EV_Door_Open, Open },
-	{ &EV_Door_CloseEnd, CloseEnd },
-	{ &EV_Door_OpenEnd, OpenEnd },
-	{ &EV_Door_Fire, DoorFire },
-	{ &EV_Door_Link, LinkDoors },
-	{ &EV_Door_SetTime, SetTime },
-	{ &EV_Use, DoorUse },
-	{ &EV_Killed, DoorFire },
-	{ &EV_Blocked, DoorBlocked },
-	{ &EV_Door_Lock, LockDoor },
-	{ &EV_Door_Unlock, UnlockDoor },
-	{ &EV_SetAngle, SetDir },
+	{ &EV_Door_StopSound, &Door::SetStopSound },
+	{ &EV_Door_MoveSound, &Door::SetMoveSound },
+	{ &EV_Door_MessageSound, &Door::SetMessageSound },
+	{ &EV_Door_LockedSound, &Door::SetLockedSound },
+	{ &EV_Door_SetWait, &Door::SetWait },
+	{ &EV_Door_SetDmg, &Door::SetDmg },
+	{ &EV_Door_TriggerFieldTouched, &Door::FieldTouched },
+	{ &EV_Trigger_Effect, &Door::TryOpen },
+	{ &EV_Activate, &Door::TryOpen },
+	{ &EV_Door_TryOpen, &Door::TryOpen },
+	{ &EV_Door_Close, &Door::Close },
+	{ &EV_Door_Open, &Door::Open },
+	{ &EV_Door_CloseEnd, &Door::CloseEnd },
+	{ &EV_Door_OpenEnd, &Door::OpenEnd },
+	{ &EV_Door_Fire, &Door::DoorFire },
+	{ &EV_Door_Link, &Door::LinkDoors },
+	{ &EV_Door_SetTime, &Door::SetTime },
+	{ &EV_Use, &Door::DoorUse },
+	{ &EV_Killed, &Door::DoorFire },
+	{ &EV_Blocked, &Door::DoorBlocked },
+	{ &EV_Door_Lock, &Door::LockDoor },
+	{ &EV_Door_Unlock, &Door::UnlockDoor },
+	{ &EV_SetAngle, &Door::SetDir },
 	{ &EV_Touch, NULL },
 	{ NULL, NULL }
 };
@@ -1159,9 +1159,9 @@ Event EV_RotatingDoor_OpenAngle
 
 CLASS_DECLARATION( Door, RotatingDoor, "func_rotatingdoor" )
 {
-	{ &EV_Door_DoClose, DoClose },
-	{ &EV_Door_DoOpen, DoOpen },
-	{ &EV_RotatingDoor_OpenAngle, OpenAngle },
+	{ &EV_Door_DoClose, &RotatingDoor::DoClose },
+	{ &EV_Door_DoOpen, &RotatingDoor::DoOpen },
+	{ &EV_RotatingDoor_OpenAngle, &RotatingDoor::OpenAngle },
 	{ NULL, NULL }
 };
 
@@ -1279,12 +1279,12 @@ Event EV_SlidingDoor_SetSpeed
 
 CLASS_DECLARATION( Door, SlidingDoor, "func_door" )
 {
-	{ &EV_Door_DoClose, DoClose },
-	{ &EV_Door_DoOpen, DoOpen },
-	{ &EV_SlidingDoor_Setup, Setup },
-	{ &EV_SlidingDoor_SetLip, SetLip },
-	{ &EV_SlidingDoor_SetSpeed, SetSpeed },
-	{ &EV_SetAngle, SetMoveDir },
+	{ &EV_Door_DoClose, &SlidingDoor::DoClose },
+	{ &EV_Door_DoOpen, &SlidingDoor::DoOpen },
+	{ &EV_SlidingDoor_Setup, &SlidingDoor::Setup },
+	{ &EV_SlidingDoor_SetLip, &SlidingDoor::SetLip },
+	{ &EV_SlidingDoor_SetSpeed, &SlidingDoor::SetSpeed },
+	{ &EV_SetAngle, &SlidingDoor::SetMoveDir },
 	{ NULL, NULL }
 };
 
@@ -1419,13 +1419,13 @@ Event EV_ScriptDoor_SetInitThread
 
 CLASS_DECLARATION( Door, ScriptDoor, "script_door" )
 {
-	{ &EV_ScriptDoor_DoInit, DoInit },
-	{ &EV_Door_DoClose, DoClose },
-	{ &EV_Door_DoOpen, DoOpen },
-	{ &EV_ScriptDoor_SetInitThread, SetInitThread },
-	{ &EV_ScriptDoor_SetOpenThread, SetOpenThread },
-	{ &EV_ScriptDoor_SetCloseThread, SetCloseThread },
-	{ &EV_SetAngle, SetMoveDir },
+	{ &EV_ScriptDoor_DoInit, &ScriptDoor::DoInit },
+	{ &EV_Door_DoClose, &ScriptDoor::DoClose },
+	{ &EV_Door_DoOpen, &ScriptDoor::DoOpen },
+	{ &EV_ScriptDoor_SetInitThread, &ScriptDoor::SetInitThread },
+	{ &EV_ScriptDoor_SetOpenThread, &ScriptDoor::SetOpenThread },
+	{ &EV_ScriptDoor_SetCloseThread, &ScriptDoor::SetCloseThread },
+	{ &EV_SetAngle, &ScriptDoor::SetMoveDir },
 	{ NULL, NULL }
 };
 

@@ -16,7 +16,7 @@ Event EV_Emitter_EmitterName
 
 CLASS_DECLARATION( Entity, Emitter, "func_emitter" )
 {
-	{ &EV_Emitter_EmitterName, EmitterName },
+	{ &EV_Emitter_EmitterName, &Emitter::EmitterName },
 };
 
 Emitter::Emitter()
@@ -82,8 +82,8 @@ Event EV_PuffDaddy_Idle
 
 CLASS_DECLARATION( Animate, PuffDaddy, "plant_puffdaddy" )
 {
-	{ &EV_Touch, Touch },
-	{ &EV_PuffDaddy_Idle, Idle },
+	{ &EV_Touch, &PuffDaddy::Touch },
+	{ &EV_PuffDaddy_Idle, &PuffDaddy::Idle },
 	{ NULL, NULL }
 };
 

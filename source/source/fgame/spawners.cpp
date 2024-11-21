@@ -141,15 +141,15 @@ Event EV_Spawn_SetSpawnChance
 
 CLASS_DECLARATION( ScriptSlave, Spawn, "func_spawn" )
 {
-	{ &EV_Activate, DoSpawn },
-	{ &EV_Spawn_ModelName, ModelName },
-	{ &EV_Spawn_SpawnTargetName, SpawnTargetName },
-	{ &EV_Spawn_AttackMode, AttackMode },
-	{ &EV_Spawn_SpawnTarget, SpawnTarget },
-	{ &EV_Spawn_PickupThread, SetPickupThread },
-	{ &EV_SetAngle, SetAngleEvent },
-	{ &EV_Spawn_AddSpawnItem, SetSpawnItem },
-	{ &EV_Spawn_SetSpawnChance, SetSpawnChance },
+	{ &EV_Activate, &Spawn::DoSpawn },
+	{ &EV_Spawn_ModelName, &Spawn::ModelName },
+	{ &EV_Spawn_SpawnTargetName, &Spawn::SpawnTargetName },
+	{ &EV_Spawn_AttackMode, &Spawn::AttackMode },
+	{ &EV_Spawn_SpawnTarget, &Spawn::SpawnTarget },
+	{ &EV_Spawn_PickupThread, &Spawn::SetPickupThread },
+	{ &EV_SetAngle, &Spawn::SetAngleEvent },
+	{ &EV_Spawn_AddSpawnItem, &Spawn::SetSpawnItem },
+	{ &EV_Spawn_SetSpawnChance, &Spawn::SetSpawnChance },
 	{ NULL, NULL }
 };
 
@@ -301,10 +301,10 @@ Event EV_RandomSpawn_Think
 
 CLASS_DECLARATION( Spawn, RandomSpawn, "func_randomspawn" )
 {
-	{ &EV_Activate, ToggleSpawn },
-	{ &EV_RandomSpawn_MinTime, MinTime },
-	{ &EV_RandomSpawn_MaxTime, MaxTime },
-	{ &EV_RandomSpawn_Think, Think },
+	{ &EV_Activate, &RandomSpawn::ToggleSpawn },
+	{ &EV_RandomSpawn_MinTime, &RandomSpawn::MinTime },
+	{ &EV_RandomSpawn_MaxTime, &RandomSpawn::MaxTime },
+	{ &EV_RandomSpawn_Think, &RandomSpawn::Think },
 	{ NULL, NULL }
 };
 

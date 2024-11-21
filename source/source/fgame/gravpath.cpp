@@ -266,12 +266,12 @@ Event EV_GravPath_SetRadius
 
 CLASS_DECLARATION( Entity, GravPathNode, "info_grav_pathnode" )
 {
-	{ &EV_GravPath_Create, CreatePath },
-	{ &EV_GravPath_Activate, Activate },
-	{ &EV_GravPath_Deactivate, Deactivate },
-	{ &EV_GravPath_SetSpeed, SetSpeed },
-	{ &EV_GravPath_SetMaxSpeed, SetMaxSpeed },
-	{ &EV_GravPath_SetRadius, SetRadius },
+	{ &EV_GravPath_Create, &GravPathNode::CreatePath },
+	{ &EV_GravPath_Activate, &GravPathNode::Activate },
+	{ &EV_GravPath_Deactivate, &GravPathNode::Deactivate },
+	{ &EV_GravPath_SetSpeed, &GravPathNode::SetSpeed },
+	{ &EV_GravPath_SetMaxSpeed, &GravPathNode::SetMaxSpeed },
+	{ &EV_GravPath_SetRadius, &GravPathNode::SetRadius },
 	{ NULL, NULL }
 };
 

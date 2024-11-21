@@ -62,8 +62,8 @@ Event EV_FlashbangProjectile_StunRadius
 
 CLASS_DECLARATION( Projectile, FlashbangProjectile, NULL )
 {
-	{ &EV_FlashbangProjectile_StunTime, StunTime },
-	{ &EV_FlashbangProjectile_StunRadius, StunRadius },
+	{ &EV_FlashbangProjectile_StunTime, &FlashbangProjectile::StunTime },
+	{ &EV_FlashbangProjectile_StunRadius, &FlashbangProjectile::StunRadius },
 	{ NULL, NULL }
 };
 

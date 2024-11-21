@@ -112,10 +112,10 @@ Event EV_ThrowGib
 
 CLASS_DECLARATION( Mover, Gib, "gib" )
 {
-	{ &EV_ThrowGib, Throw },
-	{ &EV_Touch, Splat },
-	{ &EV_Stop, Stop },
-	{ &EV_Damage, Damage },
+	{ &EV_ThrowGib, &Gib::Throw },
+	{ &EV_Touch, &Gib::Splat },
+	{ &EV_Stop, &Gib::Stop },
+	{ &EV_Damage, &Gib::Damage },
 	{ NULL, NULL }
 };
 

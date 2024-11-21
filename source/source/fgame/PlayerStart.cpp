@@ -93,8 +93,8 @@ Event EV_PlayerStart_SetThread
 
 CLASS_DECLARATION( Entity, PlayerStart, "info_player_start" )
 {
-	{ &EV_SetAngle, SetAngle },
-	{ &EV_PlayerStart_SetThread, SetThread },
+	{ &EV_SetAngle, &PlayerStart::SetAngle },
+	{ &EV_PlayerStart_SetThread, &PlayerStart::SetThread },
 	{ NULL, NULL }
 };
 

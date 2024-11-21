@@ -2371,8 +2371,8 @@ void Event::Archive( Archiver &arc )
 
 CLASS_DECLARATION( Class, Listener, NULL )
 {
-	{ &EV_Remove, Listener::Remove },
-	{ &EV_ScriptRemove, Listener::ScriptRemove },
+	{ &EV_Remove, &Listener::Remove },
+	{ &EV_ScriptRemove, &Listener::ScriptRemove },
 	{ NULL, NULL }
 };
 

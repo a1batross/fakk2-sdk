@@ -47,8 +47,8 @@ Event EV_GooDebris_Prethink
 
 CLASS_DECLARATION( Projectile, GooDebris, NULL )
 {
-	{ &EV_GooDebris_Prethink, Prethink },
-	{ &EV_Touch, Touch },
+	{ &EV_GooDebris_Prethink, &GooDebris::Prethink },
+	{ &EV_Touch, &GooDebris::Touch },
 	{ NULL, NULL }
 };
 
@@ -141,8 +141,8 @@ Event EV_Goo_DebrisCount
 
 CLASS_DECLARATION( Projectile, GooProjectile, NULL )
 {
-	{ &EV_Goo_DebrisModel, SetDebrisModel },
-	{ &EV_Goo_DebrisCount, SetDebrisCount },
+	{ &EV_Goo_DebrisModel, &GooProjectile::SetDebrisModel },
+	{ &EV_Goo_DebrisCount, &GooProjectile::SetDebrisCount },
 	{ NULL, NULL }
 };
 

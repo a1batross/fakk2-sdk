@@ -256,15 +256,15 @@ Event EV_Fulcrum_SetMoveSound
 
 CLASS_DECLARATION( ScriptSlave, Fulcrum, "func_fulcrum" )
 {
-	{ &EV_Fulcrum_SetSpeed, SetSpeed },
-	{ &EV_Fulcrum_Reset, Reset },
-	{ &EV_Fulcrum_AdjustFulcrum, Adjust },
-	{ &EV_Touch, Touched },
-	{ &EV_Fulcrum_SetResetSpeed, SetResetSpeed },
-	{ &EV_Fulcrum_SetDampening, SetDampening },
-	{ &EV_Fulcrum_SetLimit, SetLimit },
-	{ &EV_Fulcrum_Setup, Setup },
-	{ &EV_Fulcrum_SetMoveSound, SetMoveSound },
+	{ &EV_Fulcrum_SetSpeed, &Fulcrum::SetSpeed },
+	{ &EV_Fulcrum_Reset, &Fulcrum::Reset },
+	{ &EV_Fulcrum_AdjustFulcrum, &Fulcrum::Adjust },
+	{ &EV_Touch, &Fulcrum::Touched },
+	{ &EV_Fulcrum_SetResetSpeed, &Fulcrum::SetResetSpeed },
+	{ &EV_Fulcrum_SetDampening, &Fulcrum::SetDampening },
+	{ &EV_Fulcrum_SetLimit, &Fulcrum::SetLimit },
+	{ &EV_Fulcrum_Setup, &Fulcrum::Setup },
+	{ &EV_Fulcrum_SetMoveSound, &Fulcrum::SetMoveSound },
 	{ NULL, NULL }
 };
 
@@ -531,13 +531,13 @@ Event EV_RunThrough_SetOffset
 
 CLASS_DECLARATION( Entity, RunThrough, "func_runthrough" )
 {
-	{ &EV_RunThrough_SetSpeed, SetSpeed },
-	{ &EV_RunThrough_SetDelay, SetDelay },
-	{ &EV_RunThrough_SetChance, SetChance },
-	{ &EV_RunThrough_SetLip, SetLip },
-	{ &EV_RunThrough_SetSpawnModel, SetSpawnModel },
-	{ &EV_RunThrough_SetOffset, SetOffset },
-	{ &EV_Touch, Touched },
+	{ &EV_RunThrough_SetSpeed, &RunThrough::SetSpeed },
+	{ &EV_RunThrough_SetDelay, &RunThrough::SetDelay },
+	{ &EV_RunThrough_SetChance, &RunThrough::SetChance },
+	{ &EV_RunThrough_SetLip, &RunThrough::SetLip },
+	{ &EV_RunThrough_SetSpawnModel, &RunThrough::SetSpawnModel },
+	{ &EV_RunThrough_SetOffset, &RunThrough::SetOffset },
+	{ &EV_Touch, &RunThrough::Touched },
 	{ NULL, NULL }
 };
 
@@ -804,21 +804,21 @@ Event EV_SinkObject_MakeNonActive
 
 CLASS_DECLARATION( ScriptSlave, SinkObject, "func_sinkobject" )
 {
-	{ &EV_SinkObject_SetSpeed, SetSpeed },
-	{ &EV_SinkObject_SetDelay, SetDelay },
-	{ &EV_SinkObject_Reset, Reset },
-	{ &EV_SinkObject_AdjustSinkObject, Adjust },
-	{ &EV_SinkObject_Fall, Fall },
-	{ &EV_Touch, Touched },
-	{ &EV_SinkObject_SetResetSpeed, SetResetSpeed },
-	{ &EV_SinkObject_SetDampening, SetDampening },
-	{ &EV_SinkObject_SetLimit, SetLimit },
-	{ &EV_SinkObject_Setup, Setup },
-	{ &EV_SinkObject_SetResetDelay, SetResetDelay },
-	{ &EV_SinkObject_SetResetSound, SetResetSound },
-	{ &EV_SinkObject_SetSinkSound, SetSinkSound },
-	{ &EV_SinkObject_MakeActive, MakeActive },
-	{ &EV_SinkObject_MakeNonActive, MakeNonActive },
+	{ &EV_SinkObject_SetSpeed, &SinkObject::SetSpeed },
+	{ &EV_SinkObject_SetDelay, &SinkObject::SetDelay },
+	{ &EV_SinkObject_Reset, &SinkObject::Reset },
+	{ &EV_SinkObject_AdjustSinkObject, &SinkObject::Adjust },
+	{ &EV_SinkObject_Fall, &SinkObject::Fall },
+	{ &EV_Touch, &SinkObject::Touched },
+	{ &EV_SinkObject_SetResetSpeed, &SinkObject::SetResetSpeed },
+	{ &EV_SinkObject_SetDampening, &SinkObject::SetDampening },
+	{ &EV_SinkObject_SetLimit, &SinkObject::SetLimit },
+	{ &EV_SinkObject_Setup, &SinkObject::Setup },
+	{ &EV_SinkObject_SetResetDelay, &SinkObject::SetResetDelay },
+	{ &EV_SinkObject_SetResetSound, &SinkObject::SetResetSound },
+	{ &EV_SinkObject_SetSinkSound, &SinkObject::SetSinkSound },
+	{ &EV_SinkObject_MakeActive, &SinkObject::MakeActive },
+	{ &EV_SinkObject_MakeNonActive, &SinkObject::MakeNonActive },
 	{ NULL, NULL }
 };
 

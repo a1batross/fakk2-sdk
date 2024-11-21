@@ -99,12 +99,12 @@ Event EV_Sword_HitSpawn
 
 CLASS_DECLARATION( Weapon, Sword, NULL )
 {
-	{ &EV_Sword_WaterRequired, SetWaterRequiredEvent },
-	{ &EV_Sword_BasicDamage, SetBasicDamageEvent },
-	{ &EV_Sword_WaterDamage, SetWaterDamageEvent },
-	{ &EV_Sword_BasicKnockback, SetBasicKnockbackEvent },
-	{ &EV_Sword_WaterKnockback, SetWaterKnockbackEvent },
-	{ &EV_Sword_HitSpawn, SetHitSpawn },
+	{ &EV_Sword_WaterRequired, &Sword::SetWaterRequiredEvent },
+	{ &EV_Sword_BasicDamage, &Sword::SetBasicDamageEvent },
+	{ &EV_Sword_WaterDamage, &Sword::SetWaterDamageEvent },
+	{ &EV_Sword_BasicKnockback, &Sword::SetBasicKnockbackEvent },
+	{ &EV_Sword_WaterKnockback, &Sword::SetWaterKnockbackEvent },
+	{ &EV_Sword_HitSpawn, &Sword::SetHitSpawn },
 	{ NULL, NULL }
 };
 
