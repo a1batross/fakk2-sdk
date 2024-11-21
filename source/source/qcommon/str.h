@@ -118,7 +118,11 @@ public:
 };
 
 #if 1
+#ifdef _WIN32
 class EXPORT str
+#else
+class str
+#endif
 #else
 class str : public Class
 #endif
