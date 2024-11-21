@@ -187,6 +187,7 @@ inline qboolean Archiver::NoErrors( void )
 	return( !fileerror );
 }
 
+template<>
 inline void Container<str>::Archive( Archiver &arc )
 {
 	int i, num;
@@ -208,6 +209,7 @@ inline void Container<str>::Archive( Archiver &arc )
 	}
 }
 
+template<>
 inline void Container<Vector>::Archive( Archiver &arc )
 {
 	int i, num;
@@ -229,6 +231,7 @@ inline void Container<Vector>::Archive( Archiver &arc )
 	}
 }
 
+template<>
 inline void Container<int>::Archive( Archiver &arc )
 {
 	int i, num;
@@ -250,6 +253,7 @@ inline void Container<int>::Archive( Archiver &arc )
 	}
 }
 
+template<>
 inline void Container<float>::Archive( Archiver &arc )
 {
 	int i, num;

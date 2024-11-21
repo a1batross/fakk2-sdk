@@ -364,10 +364,17 @@ public:
 	SafePtr& operator=( const SafePtr& obj );
 	SafePtr& operator=( T * const obj );
 
-	friend int operator==( SafePtr<T> a, T *b );
-	friend int operator!=( SafePtr<T> a, T *b );
-	friend int operator==( T *a, SafePtr<T> b );
-	friend int operator!=( T *a, SafePtr<T> b );
+	template<class U>
+	friend int operator==( SafePtr<U> a, U *b );
+
+	template<class U>
+	friend int operator!=( SafePtr<U> a, U *b );
+
+	template<class U>
+	friend int operator==( U *a, SafePtr<U> b );
+
+	template<class U>
+	friend int operator!=( U *a, SafePtr<U> b );
 
 	operator  T *() const;
 	T * operator->() const;
