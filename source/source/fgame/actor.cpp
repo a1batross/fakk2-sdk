@@ -3784,11 +3784,11 @@ qboolean Actor::ShouldAttackEntity( Entity *ent )
 
 void Actor::SetAttackableByActors( Event *ev )
 {
-	qboolean bool;
+	qboolean b;
 
-	bool = ev->GetBoolean( 1 );
+	b = ev->GetBoolean( 1 );
 
-	SetActorFlag( ACTOR_FLAG_ATTACKABLE_BY_ACTORS, bool );
+	SetActorFlag( ACTOR_FLAG_ATTACKABLE_BY_ACTORS, b );
 }
 
 void Actor::SetAttackActors( Event *ev )
@@ -3808,14 +3808,14 @@ void Actor::SetDamageAngles( Event *ev )
 
 void Actor::SetImmortal( Event *ev )
 {
-	qboolean bool;
+	qboolean b;
 
 	if( ev->NumArgs() > 0 )
-		bool = ev->GetBoolean( 1 );
+		b = ev->GetBoolean( 1 );
 	else
-		bool = true;
+		b = true;
 
-	SetActorFlag( ACTOR_FLAG_IMMORTAL, bool );
+	SetActorFlag( ACTOR_FLAG_IMMORTAL, b );
 }
 
 qboolean Actor::IsImmortal( void )
@@ -6191,7 +6191,7 @@ void Actor::RealSpawnGib( qboolean use_tag, Event *ev )
 	qboolean   at_least_one_visible_surface = false;
 	int        surface_length;
 	int        tagnum;
-	orientation_t or;
+	orientation_t orient;
 	float      raw_offset;
 	Vector     raw_offset_dir;
 	Vector     real_tag_pos;
@@ -6223,7 +6223,7 @@ void Actor::RealSpawnGib( qboolean use_tag, Event *ev )
 		if( tagnum == -1 )
 			return;
 
-		GetRawTag( tagnum, &or );
+		GetRawTag( tagnum, &orient );
 		GetTag( tagnum, &real_tag_pos, &real_tag_dir );
 
 		real_tag_angles = real_tag_dir.toAngles();
@@ -6234,9 +6234,9 @@ void Actor::RealSpawnGib( qboolean use_tag, Event *ev )
 
 		// Determine the offset of the gib
 
-		raw_offset_dir = or.axis[0];
+		raw_offset_dir = orient.axis[0];
 
-		offset = or.origin;
+		offset = orient.origin;
 		offset += raw_offset * raw_offset_dir;
 		MatrixTransformVector( offset, orientation, orig );
 		orig += origin;
@@ -9833,11 +9833,11 @@ void Actor::IgnorePlacementWarning( Event *ev )
 
 void Actor::SetTargetable( Event *ev )
 {
-	qboolean bool;
+	qboolean b;
 
-	bool = ev->GetBoolean( 1 );
+	b = ev->GetBoolean( 1 );
 
-	SetActorFlag( ACTOR_FLAG_TARGETABLE, bool );
+	SetActorFlag( ACTOR_FLAG_TARGETABLE, b );
 }
 
 qboolean Actor::CanTarget( void )

@@ -334,7 +334,7 @@ void Vehicle::VehicleStart( Event *ev )
 	Vector      drivemins, drivemaxs;
 	float       max;
 	float       width, height;
-	orientation_t or;
+	orientation_t orient;
 
 	// become solid
 	setSolidType( SOLID_BBOX );
@@ -362,9 +362,9 @@ void Vehicle::VehicleStart( Event *ev )
 	//
 	// get the seat offset
 	//
-	if( GetRawTag( "seat", &or ))
+	if( GetRawTag( "seat", &orient ))
 	{
-		driveroffset = Vector( or.origin );
+		driveroffset = Vector( orient.origin );
 	}
 	driveroffset += seatoffset * edict->s.scale;
 

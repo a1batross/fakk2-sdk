@@ -2241,18 +2241,18 @@ qboolean Entity::GetRawTag( const char *name, orientation_t *orient )
 
 void Entity::GetTag( int tagnum, orientation_t *orient )
 {
-	orientation_t  or;
+	orientation_t  or_;
 	int i;
 
-	GetRawTag( tagnum, &or );
+	GetRawTag( tagnum, &or_ );
 
 	VectorCopy( origin, orient->origin );
 
 	for( i = 0; i < 3; i++ )
 	{
-		VectorMA( orient->origin, or.origin[i], orientation[i], orient->origin );
+		VectorMA( orient->origin, or_.origin[i], orientation[i], orient->origin );
 	}
-	MatrixMultiply( or.axis, orientation, orient->axis );
+	MatrixMultiply( or_.axis, orientation, orient->axis );
 }
 
 qboolean Entity::GetTag( const char *name, orientation_t *orient )
@@ -2270,25 +2270,25 @@ qboolean Entity::GetTag( const char *name, orientation_t *orient )
 
 void Entity::GetTag( int tagnum, Vector *pos, Vector *forward, Vector *left, Vector *up )
 {
-	orientation_t or;
+	orientation_t orient;
 
-	GetTag( tagnum, &or );
+	GetTag( tagnum, &orient );
 
 	if( pos )
 	{
-		*pos = Vector( or.origin );
+		*pos = Vector( orient.origin );
 	}
 	if( forward )
 	{
-		*forward = Vector( or.axis[ 0 ] );
+		*forward = Vector( orient.axis[ 0 ] );
 	}
 	if( left )
 	{
-		*left = Vector( or.axis[ 1 ] );
+		*left = Vector( orient.axis[ 1 ] );
 	}
 	if( up )
 	{
-		*up = Vector( or.axis[ 2 ] );
+		*up = Vector( orient.axis[ 2 ] );
 	}
 }
 

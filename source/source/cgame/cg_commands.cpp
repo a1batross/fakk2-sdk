@@ -3140,7 +3140,7 @@ void ClientGameCommandManager::EndOriginBeamEmitter( void )
 void ClientGameCommandManager::GetOrientation( str tagname, spawnthing_t *sp )
 {
 	int i;
-	orientation_t  or;
+	orientation_t  orient;
 	int tagnum;
 
 	assert( current_entity );
@@ -3159,16 +3159,16 @@ void ClientGameCommandManager::GetOrientation( str tagname, spawnthing_t *sp )
 		return;
 	}
 
-	or = cgi.Tag_LerpedOrientation( current_tiki, current_entity, tagnum );
+	orient = cgi.Tag_LerpedOrientation( current_tiki, current_entity, tagnum );
 
 	VectorCopy( current_entity->origin, sp->cgd.origin );
 
 	for( i = 0; i < 3; i++ )
 	{
-		VectorMA( sp->cgd.origin, or.origin[i], current_entity->axis[i], sp->cgd.origin );
+		VectorMA( sp->cgd.origin, orient.origin[i], current_entity->axis[i], sp->cgd.origin );
 	}
 
-	MatrixMultiply( or.axis, current_entity->axis, sp->axis );
+	MatrixMultiply( orient.axis, current_entity->axis, sp->axis );
 
 	// Set the axis based on the tag's axis
 	sp->forward = sp->axis[0];

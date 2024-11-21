@@ -821,11 +821,12 @@ typedef struct
 #define VectorSet( v, x, y, z ) (( v )[0] = ( x ), ( v )[1] = ( y ), ( v )[2] = ( z ))
 #define Vector4Copy( a, b )     (( b )[0] = ( a )[0], ( b )[1] = ( a )[1], ( b )[2] = ( a )[2], ( b )[3] = ( a )[3] )
 
-#define OrientClear( or )		      \
-	( VectorSet( or.origin, 0, 0, 0 ),    \
-	  VectorSet( or.axis[ 0 ], 1, 0, 0 ), \
-	  VectorSet( or.axis[ 1 ], 0, 1, 0 ), \
-	  VectorSet( or.axis[ 2 ], 0, 0, 1 ))
+#define OrientClear( a ) \
+	( VectorSet(( a ).origin, 0, 0, 0 ),    \
+	  VectorSet(( a ).axis[ 0 ], 1, 0, 0 ), \
+	  VectorSet(( a ).axis[ 1 ], 0, 1, 0 ), \
+	  VectorSet(( a ).axis[ 2 ], 0, 0, 1 ))
+
 #define OrientCopy( a, b )				 \
 	( VectorCopy(( a ).origin, ( b ).origin ),	 \
 	  VectorCopy(( a ).axis[ 0 ], ( b ).axis[ 0 ] ), \

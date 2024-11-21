@@ -1342,7 +1342,7 @@ out:
 // ======================
 void Weapon::GetMuzzlePosition( Vector *position, Vector *forward, Vector *right, Vector *up )
 {
-	orientation_t weap_or, barrel_or, or;
+	orientation_t weap_or, barrel_or, or_;
 	Vector        pos, f, r, u, aim_dir;
 	vec3_t        mat[3] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	vec3_t        orient[3];
@@ -1395,7 +1395,7 @@ void Weapon::GetMuzzlePosition( Vector *position, Vector *forward, Vector *right
 	// animations and the orientations will not be consistent.
 	AnglesToAxis( owner->angles, owner->orientation );
 
-	or = gi.Tag_OrientationEx( mi,
+	or_ = gi.Tag_OrientationEx( mi,
 				   owner->CurrentAnim( legs ),
 				   owner->CurrentFrame( legs ),
 				   tagnum & TAG_MASK,
@@ -1421,10 +1421,10 @@ void Weapon::GetMuzzlePosition( Vector *position, Vector *forward, Vector *right
 	VectorCopy( owner->origin, weap_or.origin );
 	for( i = 0; i < 3; i++ )
 	{
-		VectorMA( weap_or.origin, or.origin[i], orient[i], weap_or.origin );
+		VectorMA( weap_or.origin, or_.origin[i], orient[i], weap_or.origin );
 	}
 
-	MatrixMultiply( or.axis, orient, weap_or.axis );
+	MatrixMultiply( or_.axis, orient, weap_or.axis );
 
 	// For debugging
 	G_DrawCoordSystem( weap_or.origin, weap_or.axis[0], weap_or.axis[1], weap_or.axis[2], 50 );
