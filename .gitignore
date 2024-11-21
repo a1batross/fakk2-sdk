@@ -6,3 +6,6 @@ waf3-*
 
 # nano
 *.swp
+
+# clangd
+.cache
