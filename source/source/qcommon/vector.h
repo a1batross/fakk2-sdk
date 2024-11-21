@@ -91,13 +91,14 @@ public:
 	Vector( const char *text );
 
 	operator float *();
+	operator const float *() const;
 
 	float pitch( void );
 	float yaw( void );
 	float roll( void );
 	float operator[]( int index ) const;
 	float&  operator[]( int index );
-	void copyTo( vec3_t vec );
+	void copyTo( vec3_t vec ) const;
 	void setPitch( float x );
 	void setYaw( float y );
 	void setRoll( float z );
@@ -176,7 +177,7 @@ inline void Vector::setRoll( float roll )
 	z = roll;
 }
 
-inline void Vector::copyTo( vec3_t vec )
+inline void Vector::copyTo( vec3_t vec ) const
 {
 	vec[ 0 ] = x;
 	vec[ 1 ] = y;
@@ -238,6 +239,11 @@ inline Vector::Vector( const char *text )
 }
 
 inline Vector::operator float *( void )
+{
+	return &x;
+}
+
+inline Vector::operator const float *( void ) const
 {
 	return &x;
 }

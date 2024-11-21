@@ -1100,15 +1100,15 @@ public:
 
 	void CheckGround( void );
 	void UpdateViewAngles( usercmd_t *cmd );
-	qboolean AnimMove( Vector &move, Vector *endpos = NULL );
-	qboolean TestMove( Vector &pos, Vector *endpos = NULL );
-	qboolean PipeMove( Vector &move, Vector *endpos = NULL );
-	qboolean MonkeyBarMove( Vector &move, Vector *endpos = NULL );
-	qboolean CheckMove( Vector &move, Vector *endpos = NULL );
-	qboolean RopeMove( Vector &move, Vector *endpos = NULL );
+	qboolean AnimMove( const Vector &move, Vector *endpos = NULL );
+	qboolean TestMove( const Vector &pos, Vector *endpos = NULL );
+	qboolean PipeMove( const Vector &move, Vector *endpos = NULL );
+	qboolean MonkeyBarMove( const Vector &move, Vector *endpos = NULL );
+	qboolean CheckMove( const Vector &move, Vector *endpos = NULL );
+	qboolean RopeMove( const Vector &move, Vector *endpos = NULL );
 
-	float CheckMoveDist( Vector &delta );
-	float TestMoveDist( Vector &pos );
+	float CheckMoveDist( const Vector &delta );
+	float TestMoveDist( const Vector &pos );
 
 	void EndAnim_Legs( Event *ev );
 	void EndAnim_Torso( Event *ev );

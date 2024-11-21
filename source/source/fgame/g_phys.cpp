@@ -327,7 +327,7 @@ returns the blocked flags (1 = floor, 2 = step / wall)
 */
 #define STOP_EPSILON 0.1
 
-int G_ClipVelocity( Vector& in, Vector& normal, Vector& out, float overbounce )
+int G_ClipVelocity( const Vector& in, const Vector& normal, Vector& out, float overbounce )
 {
 	int   i;
 	int   blocked;

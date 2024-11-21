@@ -1888,7 +1888,7 @@ Event::Event( int num )
 	threadnum = -1;
 }
 
-Event::Event( Event &ev )
+Event::Event( const Event &ev )
 {
 	int num;
 	int i;
@@ -1975,7 +1975,7 @@ Event::Event( const char *command, int flags, const char *theFormatspec, const c
 		{
 			flags = 0;
 		}
-		flagList->AddObject((int)flags );
+		flagList->AddObject( flags );
 		sortedList->AddObject( eventnum );
 		dirtylist = true;
 	}
@@ -2016,7 +2016,7 @@ Event::Event( const char *command, int flags, const char *theFormatspec, const c
 	// suppress it if it starts with '_'
 	if( documentation && ( command[ 0 ] != '_' ))
 	{
-		eventDefList->AddObject((Event *)this );
+		eventDefList->AddObject( this );
 	}
 	else
 	{

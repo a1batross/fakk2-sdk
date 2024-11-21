@@ -4698,7 +4698,7 @@ void Player::CheckGround( void )
 	GetMoveInfo( &pm );
 }
 
-qboolean Player::MonkeyBarMove( Vector &move, Vector *endpos )
+qboolean Player::MonkeyBarMove( const Vector &move, Vector *endpos )
 {
 	Vector  up;
 	Vector  down;
@@ -4763,7 +4763,7 @@ qboolean Player::MonkeyBarMove( Vector &move, Vector *endpos )
 	return qtrue;
 }
 
-qboolean Player::PipeMove( Vector &move, Vector *endpos )
+qboolean Player::PipeMove( const Vector &move, Vector *endpos )
 {
 	Vector  up;
 	Vector  down;
@@ -4808,7 +4808,7 @@ qboolean Player::PipeMove( Vector &move, Vector *endpos )
 	return qfalse;
 }
 
-qboolean Player::AnimMove( Vector &move, Vector *endpos )
+qboolean Player::AnimMove( const Vector &move, Vector *endpos )
 {
 	Vector  up;
 	Vector  down;
@@ -4866,7 +4866,7 @@ qboolean Player::AnimMove( Vector &move, Vector *endpos )
 	}
 }
 
-qboolean Player::TestMove( Vector &move, Vector *endpos )
+qboolean Player::TestMove( const Vector &move, Vector *endpos )
 {
 	trace_t trace;
 	Vector  pos( origin + move );
@@ -4926,7 +4926,7 @@ qboolean Player::TestMove( Vector &move, Vector *endpos )
 	return qtrue;
 }
 
-qboolean Player::RopeMove( Vector &move, Vector *endpos )
+qboolean Player::RopeMove( const Vector &move, Vector *endpos )
 {
 	if( rope_grabbed )
 	{
@@ -4940,7 +4940,7 @@ qboolean Player::RopeMove( Vector &move, Vector *endpos )
 	return qfalse;
 }
 
-float Player::TestMoveDist( Vector &move )
+float Player::TestMoveDist( const Vector &move )
 {
 	Vector endpos;
 
@@ -5200,7 +5200,7 @@ void Player::CheckMoveFlags( void )
 	}
 }
 
-qboolean Player::CheckMove( Vector &move, Vector *endpos )
+qboolean Player::CheckMove( const Vector &move, Vector *endpos )
 {
 	switch( movecontrol )
 	{
@@ -5223,7 +5223,7 @@ qboolean Player::CheckMove( Vector &move, Vector *endpos )
 	}
 }
 
-float Player::CheckMoveDist( Vector &move )
+float Player::CheckMoveDist( const Vector &move )
 {
 	Vector endpos;
 

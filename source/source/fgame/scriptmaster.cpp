@@ -1593,7 +1593,7 @@ void ScriptThread::Restore( ThreadMarker *mark )
 	}
 }
 
-TargetList *ScriptThread::GetTargetList( str &targetname )
+TargetList *ScriptThread::GetTargetList( const str &targetname )
 {
 	TargetList *tlist;
 	int        num;

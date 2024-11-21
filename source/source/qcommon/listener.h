@@ -334,7 +334,7 @@ public:
 		floatValue = val;
 	};
 
-	EventVar( Vector &vec )
+	EventVar( const Vector &vec )
 	{
 		type = IS_VECTOR;
 		dirtyFlags = DIRTY_ALL & ~DIRTY_VECTOR;
@@ -494,7 +494,7 @@ public:
 	static int MapSortedEventIndex( int index );
 
 	Event();
-	Event( Event &ev );
+	Event( const Event &ev );
 	Event( Event *ev );
 	Event( const char *command, int flags, const char *formatspec, const char *argument_names, const char *documentation );
 	Event( const char *command );
@@ -528,14 +528,14 @@ public:
 	static qboolean Exists( const char *command );
 	static Event Find( str &command );
 
-	Event&                          printInfo( void );
+	Event &printInfo( void );
 
 	friend bool operator==( const Event &a, const Event &b );
 	friend bool operator!=( const Event &a, const Event &b );
 	void operator=( const Event &ev );
 
-	operator                                int();
-	operator                                const char *();
+	operator int() const;
+	operator const char *();
 
 	int NumArgs( void );
 
@@ -556,7 +556,7 @@ public:
 	void AddString( str &text );
 	void AddInteger( int val );
 	void AddFloat( float val );
-	void AddVector( Vector &vec );
+	void AddVector( const Vector &vec );
 
 #ifdef GAME_DLL
 	void AddEntity( Entity *ent );
@@ -595,7 +595,7 @@ public:
 	qboolean ProcessEvent( Event *event );
 	qboolean ProcessEvent( Event &event );
 	void PostEvent( Event *event, float time, int flags = 0 );
-	void PostEvent( Event &event, float time, int flags = 0 );
+	void PostEvent( const Event &event, float time, int flags = 0 );
 	qboolean PostponeEvent( Event &event, float time );
 	qboolean PostponeEvent( Event *event, float time );
 	void CancelEventsOfType( Event *event );
@@ -785,7 +785,7 @@ inline void Event::operator=( const Event &ev )
 	flags = ev.flags;
 }
 
-inline Event::operator int()
+inline Event::operator int() const
 {
 	return eventnum;
 }
@@ -899,7 +899,7 @@ inline void Event::AddFloat( float val )
 	data->AddObject( var );
 }
 
-inline void Event::AddVector( Vector &vec )
+inline void Event::AddVector( const Vector &vec )
 {
 	if( !data )
 	{
@@ -1009,7 +1009,7 @@ inline qboolean Listener::ProcessEvent( Event &event )
 	return ProcessEvent( ev );
 }
 
-inline void Listener::PostEvent( Event &event, float time, int flags )
+inline void Listener::PostEvent( const Event &event, float time, int flags )
 {
 	Event *ev;
 

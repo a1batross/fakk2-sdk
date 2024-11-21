@@ -99,18 +99,18 @@ public:
 
 	void FreeObjectList( void );
 	void ClearObjectList( void );
-	int NumObjects( void );
+	int NumObjects( void ) const;
 	void Resize( int maxelements );
-	void SetObjectAt( int index, Type& obj );
-	int AddObject( Type& obj );
-	int AddUniqueObject( Type& obj );
-	void AddObjectAt( int index, Type& obj );
-	int IndexOfObject( Type& obj );
-	qboolean ObjectInList( Type& obj );
-	Type&           ObjectAt( int index );
+	void SetObjectAt( int index, const Type& obj );
+	int AddObject( const Type& obj );
+	int AddUniqueObject( const Type& obj );
+	void AddObjectAt( int index, const Type& obj );
+	int IndexOfObject( const Type& obj );
+	qboolean ObjectInList( const Type& obj );
+	Type& ObjectAt( int index ) const;
 	Type *AddressOfObjectAt( int index );
 	void RemoveObjectAt( int index );
-	void RemoveObject( Type& obj );
+	void RemoveObject( const Type& obj );
 	void Sort( int( __cdecl * compare )( const void *elem1, const void *elem2 ));
 #if defined( GAME_DLL )
 	void Archive( Archiver &arc );
@@ -162,7 +162,7 @@ void Container<Type>::ClearObjectList( void )
 }
 
 template< class Type >
-int Container<Type>::NumObjects( void )
+int Container<Type>::NumObjects( void ) const
 {
 	return numobjects;
 }
@@ -205,7 +205,7 @@ void Container<Type>::Resize( int maxelements )
 }
 
 template< class Type >
-void Container<Type>::SetObjectAt( int index, Type& obj )
+void Container<Type>::SetObjectAt( int index, const Type& obj )
 {
 	if(( index <= 0 ) || ( index > numobjects ))
 	{
@@ -216,7 +216,7 @@ void Container<Type>::SetObjectAt( int index, Type& obj )
 }
 
 template< class Type >
-int Container<Type>::AddObject( Type& obj )
+int Container<Type>::AddObject( const Type& obj )
 {
 	if( !objlist )
 	{
@@ -235,7 +235,7 @@ int Container<Type>::AddObject( Type& obj )
 }
 
 template< class Type >
-int Container<Type>::AddUniqueObject( Type& obj )
+int Container<Type>::AddUniqueObject( const Type& obj )
 {
 	int index;
 
@@ -246,7 +246,7 @@ int Container<Type>::AddUniqueObject( Type& obj )
 }
 
 template< class Type >
-void Container<Type>::AddObjectAt( int index, Type& obj )
+void Container<Type>::AddObjectAt( int index, const Type& obj )
 {
 	//
 	// this should only be used when reconstructing a list that has to be identical to the original
@@ -263,7 +263,7 @@ void Container<Type>::AddObjectAt( int index, Type& obj )
 }
 
 template< class Type >
-int Container<Type>::IndexOfObject( Type& obj )
+int Container<Type>::IndexOfObject( const Type& obj )
 {
 	int i;
 
@@ -279,7 +279,7 @@ int Container<Type>::IndexOfObject( Type& obj )
 }
 
 template< class Type >
-qboolean Container<Type>::ObjectInList( Type& obj )
+qboolean Container<Type>::ObjectInList( const Type& obj )
 {
 	if( !IndexOfObject( obj ))
 	{
@@ -290,7 +290,7 @@ qboolean Container<Type>::ObjectInList( Type& obj )
 }
 
 template< class Type >
-Type& Container<Type>::ObjectAt( int index )
+Type& Container<Type>::ObjectAt( int index ) const
 {
 	if(( index <= 0 ) || ( index > numobjects ))
 	{
@@ -343,7 +343,7 @@ void Container<Type>::RemoveObjectAt( int index )
 }
 
 template< class Type >
-void Container<Type>::RemoveObject( Type& obj )
+void Container<Type>::RemoveObject( const Type& obj )
 {
 	int index;
 

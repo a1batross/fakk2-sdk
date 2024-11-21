@@ -319,13 +319,13 @@ public:
 	Expression( Expression &exp );
 	Expression( Script &script, State &state );
 
-	void operator=( Expression &exp );
+	void operator=( const Expression &exp );
 
 	bool getResult( State &state, Entity &ent, Container<Conditional *> *sent_conditionals );
 	const char *getValue( void );
 };
 
-inline void Expression::operator=( Expression &exp )
+inline void Expression::operator=( const Expression &exp )
 {
 	int i;
 

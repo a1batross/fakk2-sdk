@@ -597,7 +597,7 @@ void World::SetLavaAlpha( Event *ev )
 	level.lava_alpha = ev->GetFloat( 1 );
 }
 
-TargetList * World::GetTargetList( str &targetname )
+TargetList * World::GetTargetList( const str &targetname )
 {
 	TargetList *targetlist;
 	int        i;
@@ -632,7 +632,7 @@ void World::RemoveTargetEntity( str &targetname, Entity *ent )
 	targetlist->RemoveEntity( ent );
 }
 
-Entity * World::GetNextEntity( str &targetname, Entity *ent )
+Entity * World::GetNextEntity( const str &targetname, Entity *ent )
 {
 	TargetList *targetlist;
 
@@ -673,7 +673,7 @@ TargetList::TargetList()
 {
 }
 
-TargetList::TargetList( str &tname )
+TargetList::TargetList( const str &tname )
 {
 	targetname = tname;
 }

@@ -244,7 +244,7 @@ protected:
 	void SetCvarEvent( Event *ev );
 	void SetThreadName( Event *ev );
 
-	TargetList *GetTargetList( str &targetname );
+	TargetList *GetTargetList( const str &targetname );
 
 	void CueCamera( Event *ev );
 	void CuePlayer( Event *ev );

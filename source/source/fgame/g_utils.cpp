@@ -619,7 +619,7 @@ trace_t G_Trace( vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, gentity_t *
 	return trace;
 }
 
-trace_t G_Trace( Vector &start, Vector &mins, Vector &maxs, Vector &end, Entity *passent, int contentmask, qboolean cylinder, const char *reason )
+trace_t G_Trace( const Vector &start, const Vector &mins, const Vector &maxs, const Vector &end, Entity *passent, int contentmask, qboolean cylinder, const char *reason )
 {
 	gentity_t *ent;
 	int       entnum;

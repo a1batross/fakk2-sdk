@@ -68,7 +68,7 @@ public:
 	str                 targetname;
 
 	TargetList();
-	TargetList( str &tname );
+	TargetList( const str &tname );
 	~TargetList();
 	void AddEntity( Entity *ent );
 	void RemoveEntity( Entity *ent );
@@ -95,10 +95,10 @@ public:
 	qboolean sky_portal;
 
 	void FreeTargetList( void );
-	TargetList *GetTargetList( str &targetname );
+	TargetList *GetTargetList( const str &targetname );
 	void AddTargetEntity( str &targetname, Entity *ent );
 	void RemoveTargetEntity( str &targetname, Entity *ent );
-	Entity *GetNextEntity( str &targetname, Entity *ent );
+	Entity *GetNextEntity( const str &targetname, Entity *ent );
 	void SetSoundtrack( Event *ev );
 	void SetGravity( Event *ev );
 	void SetSkipThread( Event *ev );

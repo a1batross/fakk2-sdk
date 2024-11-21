@@ -146,7 +146,7 @@ Entity *G_NextEntity( Entity *ent );
 void G_CalcBoundsOfMove( Vector &start, Vector &end, Vector &mins, Vector &maxs, Vector *minbounds, Vector *maxbounds );
 
 void G_ShowTrace( trace_t *trace, gentity_t *passent, const char *reason );
-trace_t G_Trace( Vector &start, Vector &mins, Vector &maxs, Vector &end, Entity *passent, int contentmask, qboolean cylindrical, const char *reason );
+trace_t G_Trace( const Vector &start, const Vector &mins, const Vector &maxs, const Vector &end, Entity *passent, int contentmask, qboolean cylindrical, const char *reason );
 trace_t G_Trace( vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, gentity_t *passent, int contentmask, qboolean cylindrical, const char *reason );
 void G_TraceEntities( Vector &start, Vector &mins, Vector &maxs, Vector &end, Container<Entity *> *victimlist, int contentmask );
 
