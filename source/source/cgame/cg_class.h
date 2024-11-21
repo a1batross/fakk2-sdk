@@ -127,9 +127,9 @@ public:
 #define CLASS_PROTOTYPE( nameofclass )			  \
 public:							  \
 	static ClassDef ClassInfo;			  \
-	static void *nameofclass::_newInstance( void );	  \
-	virtual ClassDef *nameofclass::classinfo( void ); \
-	static ResponseDef<nameofclass> nameofclass::Responses[];
+	static void *_newInstance( void );	  \
+	virtual ClassDef *classinfo( void ); \
+	static ResponseDef<nameofclass> Responses[];
 
 class Class
 {

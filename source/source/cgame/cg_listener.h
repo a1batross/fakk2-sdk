@@ -81,10 +81,10 @@ private:
 	friend void CG_ClearEventList( void );
 	friend void CG_InitEvents( void );
 
-	static Container<str *> *Event::commandList;
-	static Container<int>   *Event::flagList;
-	static Container<int>   *Event::sortedList;
-	static qboolean         Event::dirtylist;
+	static Container<str *> *commandList;
+	static Container<int>   *flagList;
+	static Container<int>   *sortedList;
+	static qboolean         dirtylist;
 
 	static int compareEvents( const void *arg1, const void *arg2 );
 	static void SortEventList( void );

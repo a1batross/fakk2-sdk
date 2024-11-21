@@ -37,7 +37,7 @@ public:
 
 	CLASS_PROTOTYPE( Fists );
 
-	Fists::Fists();
+	Fists();
 	virtual void Shoot( Event *ev );
 	virtual void Archive( Archiver &arc );
 	virtual void Unarchive( Archiver &arc );
